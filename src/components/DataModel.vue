@@ -18,7 +18,7 @@
             </tbody>
         </table>
 
-        <!-- <h1 class="mt-5">Perbandingan Prioritas</h1>
+        <h1 class="mt-5">Perbandingan Prioritas</h1>
         <table class="table table-stripped mt-5">
             <thead>
                 <tr>
@@ -38,13 +38,13 @@
                     <td v-for="i in total" :key="i">{{ i }}</td>
                 </tr>
             </tbody>
-        </table> -->
+        </table>
         <button class="btn btn-primary float" @click="normalize">
             N
         </button>
 
        
-        <!-- <h1 class="mt-5">Normalisasi</h1>
+        <h1 class="mt-5">Normalisasi</h1>
         <table class="table table-stripped mt-5">
             <thead>
                 <tr>
@@ -62,9 +62,9 @@
                     <td v-for="i in total" :key="i">{{ i/i }}</td>
                 </tr>
             </tbody>
-        </table> -->
+        </table>
 
-        <!-- <h1 class="mt-5">Nilai Bobot</h1>
+        <h1 class="mt-5">Nilai Bobot</h1>
         <table class="table table-stripped mt-5">
             <thead>
                 <tr>
@@ -78,9 +78,9 @@
                     <td v-text="a.eigen"></td>
                 </tr>
             </tbody>
-        </table> -->
+        </table>
 
-        <!-- <h1>Nilai Eigen Prioritas</h1>
+        <h1>Nilai Eigen Prioritas</h1>
         <table class="table table-stripped mt-5">
             <thead>
                 <tr>
@@ -98,7 +98,7 @@
                     <td v-text="n.lam"></td>
                 </tr>
             </tbody>
-        </table> -->
+        </table>
         <!-- <br><br>
         <h1>Lamda Max adalah {{ eigenMax }}</h1>
         <h1>Nilai Consistency Index adalah {{ ci }}</h1>
