@@ -29,7 +29,7 @@
             <tbody>
                 <tr  v-for="c in kriteria" :key="c">
                     <td>{{ c.nama }}</td>
-                    <td v-for="d in c.wt" :key="d">
+                    <td v-for="d in c.wt2" :key="d">
                         {{ d }}
                     </td>
                 </tr>
@@ -207,6 +207,7 @@ export default {
                     nama: 'Logika',
                     prioritas: 1,
                     wt: [1, 3, 2, 3, 3],
+                    wt2: [],
                     nm: [],
                     eigen: 0,
                     nEigen: [],
@@ -217,6 +218,7 @@ export default {
                     nama: 'Bahasa Inggris',
                     prioritas: 3,
                     wt: [0.33, 1, 3, 2, 3],
+                    wt2: [],
                     nm: [],
                     eigen: 0,
                     nEigen: [],
@@ -227,6 +229,7 @@ export default {
                     nama: 'Komputer',
                     prioritas: 2,
                     wt: [0.5, 0.33, 1, 2, 3],
+                    wt2: [],
                     nm: [],
                     eigen: 0,
                     nEigen: [],
@@ -237,6 +240,7 @@ export default {
                     nama: 'Wawancara',
                     prioritas: 3,
                     wt: [0.33, 0.5, 0.5, 1, 2],
+                    wt2: [],
                     nm: [],
                     eigen: 0,
                     nEigen: [],
@@ -247,6 +251,7 @@ export default {
                     nama: 'Pengetahuan Umum',
                     prioritas: 3,
                     wt: [0.33, 0.33, 0.33,  0.5, 1],
+                    wt2: [],
                     nm: [],
                     eigen: 0,
                     nEigen: [],
@@ -262,16 +267,16 @@ export default {
             let c = []
             let k = []
             const reducer = (pr, cr) => pr + cr;
-            for(let i=0; i<this.kriteria.length; i++) {
-                k = []
-                for(let j=0; j<this.kriteria[i].wt.length; j++) {
-                    let y = this.kriteria[j].wt[i]
-                    k.push(y)
+                for(let i=0; i<this.kriteria.length; i++) {
+                    k = []
+                    for(let j=0; j<this.kriteria[i].wt.length; j++) {
+                        let y = this.kriteria[j].wt[i]
+                        k.push(y)
+                    }
+                    let y = k.reduce(reducer)
+                    c.push(y)
                 }
-                let y = k.reduce(reducer)
-                c.push(y)
-            }
-            return c
+                return c
         },
         eigenMax: function() {
             let em = []
@@ -294,6 +299,19 @@ export default {
     methods: {
         normalize: function() {
             const reducer = (pr, cr) => pr + cr;
+
+            let wt = []
+            for(let i=0; i<this.kriteria.length; i++) {
+                wt.push(this.kriteria[i].prioritas)
+            }
+            for(let j=0; j<this.kriteria.length; j++) {
+                for(let k=0; k<wt.length; k++) {
+                    this.kriteria[j].wt2.push(this.kriteria[j].prioritas/wt[k])
+                }
+                console.log(this.kriteria[j].wt2)
+            }
+            console.log(wt)
+
             for(let i=0; i<this.kriteria.length; i++) {
                 for(let j=0; j<this.kriteria[i].wt.length; j++) {
                     let y = this.kriteria[i].wt[j]/this.total[j]
@@ -327,18 +345,8 @@ export default {
                 c4.push(this.alt[h].wc)
                 c5.push(this.alt[h].pu)
             }
-            // console.log(Math.max.apply(null, c1))
-            // console.log(Math.max.apply(null, c2))
-            // console.log(Math.max.apply(null, c3))
-            // console.log(Math.max.apply(null, c4))
-            // console.log(Math.max.apply(null, c5))
 
             for(let h=0; h<this.alt.length;h++) {
-                // this.alt[h].lm = this.alt[h].lm/Math.max.apply(null, c1)
-                // this.alt[h].bi = this.alt[h].bi/Math.max.apply(null, c2)
-                // this.alt[h].kp = this.alt[h].kp/Math.max.apply(null, c3)
-                // this.alt[h].wc = this.alt[h].wc/Math.max.apply(null, c4)
-                // this.alt[h].pu = this.alt[h].pu/Math.max.apply(null, c5)
 
                 this.alt[h].v = (this.alt[h].lm*this.kriteria[0].eigen) +
                             (this.alt[h].bi*this.kriteria[1].eigen) +
