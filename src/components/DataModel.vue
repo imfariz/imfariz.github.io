@@ -1,6 +1,69 @@
 <template>
     <div>
-        <h1>Metode AHP</h1>
+        <h1>Input Perbandingan</h1>
+        <table class="table mt-5 mb-5">
+            <thead>
+                <tr>
+                    <th>Alternatif</th>
+                    <th>Perbandingan</th>
+                    <th>Alternatif</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Logika</td>
+                    <td><input type="text" style="text-align: center" v-model="this.kriteria[0].wt[1]"></td>
+                    <td>Bahasa Inggris</td>
+                </tr>
+                <tr>
+                    <td>Logika</td>
+                    <td><input type="text" style="text-align: center" v-model="this.kriteria[0].wt[2]"></td>
+                    <td>Komputer</td>
+                </tr>
+                <tr>
+                    <td>Logika</td>
+                    <td><input type="text" style="text-align: center" v-model="this.kriteria[0].wt[3]"></td>
+                    <td>Wawancara</td>
+                </tr>
+                <tr>
+                    <td>Logika</td>
+                    <td><input type="text" style="text-align: center" v-model="this.kriteria[0].wt[4]"></td>
+                    <td>Pengetahuan Umum</td>
+                </tr>
+                <tr>
+                    <td>Bahasa Inggris</td>
+                    <td><input type="text" style="text-align: center" v-model="this.kriteria[1].wt[2]"></td>
+                    <td>Komputer</td>
+                </tr>
+                <tr>
+                    <td>Bahasa Inggris</td>
+                    <td><input type="text" style="text-align: center" v-model="this.kriteria[1].wt[3]"></td>
+                    <td>Wawancara</td>
+                </tr>
+                <tr>
+                    <td>Bahasa Inggris</td>
+                    <td><input type="text" style="text-align: center" v-model="this.kriteria[1].wt[4]"></td>
+                    <td>Pengetahuan Umum</td>
+                </tr>
+                <tr>
+                    <td>Komputer</td>
+                    <td><input type="text" style="text-align: center" v-model="this.kriteria[2].wt[3]"></td>
+                    <td>Wawancara</td>
+                </tr>
+                <tr>
+                    <td>Komputer</td>
+                    <td><input type="text" style="text-align: center" v-model="this.kriteria[2].wt[4]"></td>
+                    <td>Pengetahuan Umum</td>
+                </tr>
+                <tr>
+                    <td>Wawancara</td>
+                    <td><input type="text" style="text-align: center" v-model="this.kriteria[3].wt[4]"></td>
+                    <td>Pengetahuan Umum</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- <h1>Metode AHP</h1>
         <table class="table mt-5 mb-5">
             <thead>
                 <tr>
@@ -16,7 +79,7 @@
                     <td v-text="k.eigen"></td>
                 </tr>
             </tbody>
-        </table>
+        </table> -->
 
         <h1 class="mt-5">Perbandingan Prioritas</h1>
         <table class="table table-stripped mt-5">
@@ -27,11 +90,35 @@
                 </tr>
             </thead>
             <tbody>
-                <tr  v-for="c in kriteria" :key="c">
-                    <td>{{ c.nama }}</td>
-                    <td v-for="d in c.wt2" :key="d">
-                        {{ d }}
-                    </td>
+                <tr>
+                   <td>{{ kriteria[0].nama }}</td>
+                   <td v-for="x in 5" :key="x">
+                       <input type="text" style="border: none; text-align: center" v-model="kriteria[0].wt[x-1]">
+                   </td>
+                </tr>
+                <tr>
+                   <td>{{ kriteria[1].nama }}</td>
+                   <td v-for="x in 5" :key="x">
+                       <input type="text" style="border: none; text-align: center" v-model="kriteria[1].wt[x-1]">
+                   </td>
+                </tr>
+                <tr>
+                   <td>{{ kriteria[2].nama }}</td>
+                   <td v-for="x in 5" :key="x">
+                       <input type="text" style="border: none; text-align: center" v-model="kriteria[2].wt[x-1]">
+                   </td>
+                </tr>
+                <tr>
+                   <td>{{ kriteria[3].nama }}</td>
+                   <td v-for="x in 5" :key="x">
+                       <input type="text" style="border: none; text-align: center" v-model="kriteria[3].wt[x-1]">
+                   </td>
+                </tr>
+                <tr>
+                   <td>{{ kriteria[4].nama }}</td>
+                   <td v-for="x in 5" :key="x">
+                       <input type="text" style="border: none; text-align: center" v-model="kriteria[4].wt[x-1]">
+                   </td>
                 </tr>
                 <tr>
                     <td>Total</td>
@@ -266,17 +353,20 @@ export default {
         total: function() {
             let c = []
             let k = []
-            const reducer = (pr, cr) => pr + cr;
-                for(let i=0; i<this.kriteria.length; i++) {
-                    k = []
-                    for(let j=0; j<this.kriteria[i].wt.length; j++) {
-                        let y = this.kriteria[j].wt[i]
-                        k.push(y)
+            if(this.kriteria[0].wt != []) {
+                const reducer = (pr, cr) => pr + cr;
+                    for(let i=0; i<this.kriteria.length; i++) {
+                        k = []
+                        for(let j=0; j<this.kriteria[i].wt.length; j++) {
+                            let y = this.kriteria[j].wt[i]
+                            k.push(y)
+                        }
+                        let y = k.reduce(reducer)
+                        c.push(y)
                     }
-                    let y = k.reduce(reducer)
-                    c.push(y)
-                }
-                return c
+                    
+            }
+                    return c
         },
         eigenMax: function() {
             let em = []
@@ -297,20 +387,53 @@ export default {
         }
     },
     methods: {
-        normalize: function() {
-            const reducer = (pr, cr) => pr + cr;
-
-            let wt = []
-            for(let i=0; i<this.kriteria.length; i++) {
-                wt.push(this.kriteria[i].prioritas)
-            }
-            for(let j=0; j<this.kriteria.length; j++) {
-                for(let k=0; k<wt.length; k++) {
-                    this.kriteria[j].wt2.push(this.kriteria[j].prioritas/wt[k])
+        comparison: function() {
+            for(let x=0; x<this.kriteria.length; x++) {
+                for(let y=0; y<this.kriteria[x].wt.length; y++) {
+                    if(x == y) {
+                        this.kriteria[x].wt[y] = 1
+                    }
                 }
-                console.log(this.kriteria[j].wt2)
             }
-            console.log(wt)
+
+            this.kriteria[1].wt[0] = 1/this.kriteria[0].wt[1]
+            this.kriteria[2].wt[0] = 1/this.kriteria[0].wt[2]
+            this.kriteria[3].wt[0] = 1/this.kriteria[0].wt[3]
+            this.kriteria[4].wt[0] = 1/this.kriteria[0].wt[4]
+
+            this.kriteria[2].wt[1] = 1/this.kriteria[1].wt[2]
+
+            this.kriteria[3].wt[1] = 1/this.kriteria[1].wt[3]
+            this.kriteria[3].wt[2] = 1/this.kriteria[2].wt[3]
+
+            this.kriteria[4].wt[1] = 1/this.kriteria[1].wt[4]
+            this.kriteria[4].wt[2] = 1/this.kriteria[2].wt[4]
+            this.kriteria[4].wt[3] = 1/this.kriteria[3].wt[4]
+        },
+        normalize: function() {
+            this.comparison()
+            const reducer = (pr, cr) => pr + cr;
+    
+            for(let x=0; x<this.kriteria.length;x++) {
+                let i = this.kriteria[x].prioritas
+                for(let y=0; y<this.kriteria.length;y++) {
+                    this.kriteria[y].wt2.push(i/this.kriteria[y].prioritas)
+                }
+            }
+
+            console.log(this.kriteria[0].wt)
+
+            // let wt = []
+            // for(let i=0; i<this.kriteria.length; i++) {
+            //     wt.push(this.kriteria[i].prioritas)
+            // }
+            // for(let j=0; j<this.kriteria.length; j++) {
+            //     for(let k=0; k<wt.length; k++) {
+            //         this.kriteria[j].wt2.push(this.kriteria[j].prioritas/wt[k])
+            //     }
+            //     console.log(this.kriteria[j].wt2)
+            // }
+            // console.log(wt)
 
             for(let i=0; i<this.kriteria.length; i++) {
                 for(let j=0; j<this.kriteria[i].wt.length; j++) {
