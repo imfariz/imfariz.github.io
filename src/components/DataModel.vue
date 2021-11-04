@@ -1,65 +1,95 @@
 <template>
     <div>
         <h1>Input Data</h1>
-        <div class="input">
+        <div class="input d-flex">
             <!-- <h1>Input Perbandingan</h1> -->
             <table class="table mt-5 mb-5 mx-2 table-bordered border-secondary w-45">
                 <thead>
                     <tr>
-                        <th>Alternatif</th>
+                        <th>Kriteria</th>
                         <th>Perbandingan</th>
-                        <th>Alternatif</th>
+                        <th>Kriteria</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>Logika</td>
-                        <td><input type="number" style="text-align: center" v-model="this.kriteria[0].wt[1]"></td>
+                        <td>
+                            <p> {{ text }}</p>
+                            <input type="range" min="1" max="17" step="1" v-model="test">
+                        </td>
                         <td>Bahasa Inggris</td>
                     </tr>
                     <tr>
                         <td>Logika</td>
-                        <td><input type="number" style="text-align: center" v-model="this.kriteria[0].wt[2]"></td>
+                        <td>
+                            <p> {{ text2 }}</p>
+                            <input type="range" min="1" max="17" step="1" v-model="test2">
+                        </td>
                         <td>Komputer</td>
                     </tr>
                     <tr>
                         <td>Logika</td>
-                        <td><input type="number" style="text-align: center" v-model="this.kriteria[0].wt[3]"></td>
+                        <td>
+                            <p> {{ text3 }}</p>
+                            <input type="range" min="1" max="17" step="1" v-model="test3">
+                        </td>
                         <td>Wawancara</td>
                     </tr>
                     <tr>
                         <td>Logika</td>
-                        <td><input type="number" style="text-align: center" v-model="this.kriteria[0].wt[4]"></td>
+                        <td>
+                            <p> {{ text4 }}</p>
+                            <input type="range" min="1" max="17" step="1" v-model="test4">
+                        </td>
                         <td>Pengetahuan Umum</td>
                     </tr>
                     <tr>
                         <td>Bahasa Inggris</td>
-                        <td><input type="number" style="text-align: center" v-model="this.kriteria[1].wt[2]"></td>
+                        <td>
+                            <p> {{ text5 }}</p>
+                            <input type="range" min="1" max="17" step="1" v-model="test5">
+                        </td>
                         <td>Komputer</td>
                     </tr>
                     <tr>
                         <td>Bahasa Inggris</td>
-                        <td><input type="number" style="text-align: center" v-model="this.kriteria[1].wt[3]"></td>
+                        <td>
+                            <p> {{ text6 }}</p>
+                            <input type="range" min="1" max="17" step="1" v-model="test6">
+                        </td>
                         <td>Wawancara</td>
                     </tr>
                     <tr>
                         <td>Bahasa Inggris</td>
-                        <td><input type="number" style="text-align: center" v-model="this.kriteria[1].wt[4]"></td>
+                        <td>
+                            <p> {{ text7 }}</p>
+                            <input type="range" min="1" max="17" step="1" v-model="test7">
+                        </td>
                         <td>Pengetahuan Umum</td>
                     </tr>
                     <tr>
                         <td>Komputer</td>
-                        <td><input type="number" style="text-align: center" v-model="this.kriteria[2].wt[3]"></td>
+                        <td>
+                            <p> {{ text8 }}</p>
+                            <input type="range" min="1" max="17" step="1" v-model="test8">
+                        </td>
                         <td>Wawancara</td>
                     </tr>
                     <tr>
                         <td>Komputer</td>
-                        <td><input type="number" style="text-align: center" v-model="this.kriteria[2].wt[4]"></td>
+                        <td>
+                            <p> {{ text9 }}</p>
+                            <input type="range" min="1" max="17" step="1" v-model="test9">
+                        </td>
                         <td>Pengetahuan Umum</td>
                     </tr>
                     <tr>
                         <td>Wawancara</td>
-                        <td><input type="number" style="text-align: center" v-model="this.kriteria[3].wt[4]"></td>
+                        <td>
+                            <p> {{ text0 }}</p>
+                            <input type="range" min="1" max="17" step="1" v-model="test0">
+                        </td>
                         <td>Pengetahuan Umum</td>
                     </tr>
                 </tbody>
@@ -136,7 +166,7 @@
                 </tbody>
             </table>
 
-        <!-- <h1>Metode AHP</h1>
+        <h1>Metode AHP</h1>
         <table class="table mt-5 mb-5">
             <thead>
                 <tr>
@@ -152,7 +182,7 @@
                     <td v-text="k.eigen"></td>
                 </tr>
             </tbody>
-        </table> -->
+        </table>
 
         <button class="btn btn-primary float" @click="normalize">
             N
@@ -228,6 +258,24 @@ export default {
     name: 'DataModel',
     data() {
         return {
+            test: 0,
+            text: "Prioritas",
+            test2: 0,
+            text2: "Prioritas",
+            test3: 0,
+            text3: "Prioritas",
+            test4: 0,
+            text4: "Prioritas",
+            test5: 0,
+            text5: "Prioritas",
+            test6: 0,
+            text6: "Prioritas",
+            test7: 0,
+            text7: "Prioritas",
+            test8: 0,
+            text8: "Prioritas",
+            test9: 0,
+            text9: "Prioritas",
             data: [
                 {
                     nama: 'Somber',
@@ -345,8 +393,7 @@ export default {
                     jumlah: 0,
                     lam: 0
                 },
-            ],
-            vb: []
+            ]
         }
     },
     computed: {
@@ -386,6 +433,789 @@ export default {
             return (this.cr<=0.1)? "Sudah Konsisten" : "Belum Konsisten"
         }
     },
+    watch: {
+      test: function(val) {
+      if(val == 1) {
+        this.text = "Mutlak Tidak Lebih Penting dari"
+        this.kriteria[0].wt[1] = 1/9
+      }
+      if(val == 3 || val == 2) {
+        this.text = "Sangat Tidak Lebih Penting dari"
+        if(val == 2) {
+          this.kriteria[0].wt[1] = 1/8
+        }
+        if(val == 3) {
+          this.kriteria[0].wt[1] = 1/7
+        }
+      }
+      if(val == 5 || val == 4) {
+        this.text = "Tidak Lebih Penting dari"
+        if(val == 4) {
+          this.kriteria[0].wt[1] = 1/6
+        }
+        if(val == 5) {
+          this.kriteria[0].wt[1] = 1/5
+        }
+      }
+      if(val == 7 || val == 6) {
+        this.text = "Sedikit Tidak Lebih Penting dari"
+        if(val == 6) {
+          this.kriteria[0].wt[1] = 1/4
+        }
+        if(val == 7) {
+          this.kriteria[0].wt[1] = 1/3
+        }
+      }
+      if(val == 9 || val == 8 || val == 10) {
+        this.text = "Sama Pentingnya"
+        if(val == 8) {
+          this.kriteria[0].wt[1] = 1/2
+        }
+        if(val == 9) {
+          this.kriteria[0].wt[1] = 1
+        }
+        if(val == 10) {
+          this.kriteria[0].wt[1] = 2
+        }
+      }
+      if(val == 11 || val == 12) {
+        this.text = "Sedikit Lebih Penting dari"
+        if(val == 11) {
+          this.kriteria[0].wt[1] = 3
+        }
+        if(val == 12) {
+          this.kriteria[0].wt[1] = 4
+        }
+      }
+      if(val == 13 || val == 14) {
+        this.text = "Lebih Penting dari"
+        if(val == 13) {
+          this.kriteria[0].wt[1] = 5
+        }
+        if(val == 14) {
+          this.kriteria[0].wt[1] = 6
+        }
+      }
+      if(val == 15 || val == 16) {
+        this.text = "Sangat Lebih Penting dari"
+        if(val == 15) {
+          this.kriteria[0].wt[1] = 7
+        }
+        if(val == 16) {
+          this.kriteria[0].wt[1] = 8
+        }
+      }
+      if(val == 17) {
+        this.text = "Mutlak Lebih Penting dari"
+        if(val == 17) {
+          this.kriteria[0].wt[1] = 9
+        }
+      } 
+    },
+      test1: function(val) {
+      if(val == 1) {
+        this.text1 = "Mutlak Tidak Lebih Penting dari"
+        this.kriteria[0].wt[2] = 1/9
+      }
+      if(val == 3 || val == 2) {
+        this.text1 = "Sangat Tidak Lebih Penting dari"
+        if(val == 2) {
+          this.kriteria[0].wt[2] = 1/8
+        }
+        if(val == 3) {
+          this.kriteria[0].wt[2] = 1/7
+        }
+      }
+      if(val == 5 || val == 4) {
+        this.text1 = "Tidak Lebih Penting dari"
+        if(val == 4) {
+          this.kriteria[0].wt[2] = 1/6
+        }
+        if(val == 5) {
+          this.kriteria[0].wt[2] = 1/5
+        }
+      }
+      if(val == 7 || val == 6) {
+        this.text1 = "Sedikit Tidak Lebih Penting dari"
+        if(val == 6) {
+          this.kriteria[0].wt[2] = 1/4
+        }
+        if(val == 7) {
+          this.kriteria[0].wt[2] = 1/3
+        }
+      }
+      if(val == 9 || val == 8 || val == 10) {
+        this.text1 = "Sama Pentingnya"
+        if(val == 8) {
+          this.kriteria[0].wt[2] = 1/2
+        }
+        if(val == 9) {
+          this.kriteria[0].wt[2] = 1
+        }
+        if(val == 10) {
+          this.kriteria[0].wt[2] = 2
+        }
+      }
+      if(val == 11 || val == 12) {
+        this.text1 = "Sedikit Lebih Penting dari"
+        if(val == 11) {
+          this.kriteria[0].wt[2] = 3
+        }
+        if(val == 12) {
+          this.kriteria[0].wt[2] = 4
+        }
+      }
+      if(val == 13 || val == 14) {
+        this.text1 = "Lebih Penting dari"
+        if(val == 13) {
+          this.kriteria[0].wt[2] = 5
+        }
+        if(val == 14) {
+          this.kriteria[0].wt[2] = 6
+        }
+      }
+      if(val == 15 || val == 16) {
+        this.text1 = "Sangat Lebih Penting dari"
+        if(val == 15) {
+          this.kriteria[0].wt[2] = 7
+        }
+        if(val == 16) {
+          this.kriteria[0].wt[2] = 8
+        }
+      }
+      if(val == 17) {
+        this.text1 = "Mutlak Lebih Penting dari"
+        if(val == 17) {
+          this.kriteria[0].wt[2] = 9
+        }
+      } 
+    },
+      test2: function(val) {
+      if(val == 1) {
+        this.text2 = "Mutlak Tidak Lebih Penting dari"
+        this.kriteria[0].wt[3] = 1/9
+      }
+      if(val == 3 || val == 2) {
+        this.text2 = "Sangat Tidak Lebih Penting dari"
+        if(val == 2) {
+          this.kriteria[0].wt[3] = 1/8
+        }
+        if(val == 3) {
+          this.kriteria[0].wt[3] = 1/7
+        }
+      }
+      if(val == 5 || val == 4) {
+        this.text2 = "Tidak Lebih Penting dari"
+        if(val == 4) {
+          this.kriteria[0].wt[3] = 1/6
+        }
+        if(val == 5) {
+          this.kriteria[0].wt[3] = 1/5
+        }
+      }
+      if(val == 7 || val == 6) {
+        this.text2 = "Sedikit Tidak Lebih Penting dari"
+        if(val == 6) {
+          this.kriteria[0].wt[3] = 1/4
+        }
+        if(val == 7) {
+          this.kriteria[0].wt[3] = 1/3
+        }
+      }
+      if(val == 9 || val == 8 || val == 10) {
+        this.text2 = "Sama Pentingnya"
+        if(val == 8) {
+          this.kriteria[0].wt[3] = 1/2
+        }
+        if(val == 9) {
+          this.kriteria[0].wt[3] = 1
+        }
+        if(val == 10) {
+          this.kriteria[0].wt[3] = 2
+        }
+      }
+      if(val == 11 || val == 12) {
+        this.text2 = "Sedikit Lebih Penting dari"
+        if(val == 11) {
+          this.kriteria[0].wt[3] = 3
+        }
+        if(val == 12) {
+          this.kriteria[0].wt[3] = 4
+        }
+      }
+      if(val == 13 || val == 14) {
+        this.text2 = "Lebih Penting dari"
+        if(val == 13) {
+          this.kriteria[0].wt[3] = 5
+        }
+        if(val == 14) {
+          this.kriteria[0].wt[3] = 6
+        }
+      }
+      if(val == 15 || val == 16) {
+        this.text2 = "Sangat Lebih Penting dari"
+        if(val == 15) {
+          this.kriteria[0].wt[3] = 7
+        }
+        if(val == 16) {
+          this.kriteria[0].wt[3] = 8
+        }
+      }
+      if(val == 17) {
+        this.text2 = "Mutlak Lebih Penting dari"
+        if(val == 17) {
+          this.kriteria[0].wt[3] = 9
+        }
+      } 
+    },
+      test3: function(val) {
+      if(val == 1) {
+        this.text3 = "Mutlak Tidak Lebih Penting dari"
+        this.kriteria[0].wt[4] = 1/9
+      }
+      if(val == 3 || val == 2) {
+        this.text3 = "Sangat Tidak Lebih Penting dari"
+        if(val == 2) {
+          this.kriteria[0].wt[4] = 1/8
+        }
+        if(val == 3) {
+          this.kriteria[0].wt[4] = 1/7
+        }
+      }
+      if(val == 5 || val == 4) {
+        this.text3 = "Tidak Lebih Penting dari"
+        if(val == 4) {
+          this.kriteria[0].wt[4] = 1/6
+        }
+        if(val == 5) {
+          this.kriteria[0].wt[4] = 1/5
+        }
+      }
+      if(val == 7 || val == 6) {
+        this.text3 = "Sedikit Tidak Lebih Penting dari"
+        if(val == 6) {
+          this.kriteria[0].wt[4] = 1/4
+        }
+        if(val == 7) {
+          this.kriteria[0].wt[4] = 1/3
+        }
+      }
+      if(val == 9 || val == 8 || val == 10) {
+        this.text3 = "Sama Pentingnya"
+        if(val == 8) {
+          this.kriteria[0].wt[4] = 1/2
+        }
+        if(val == 9) {
+          this.kriteria[0].wt[4] = 1
+        }
+        if(val == 10) {
+          this.kriteria[0].wt[4] = 2
+        }
+      }
+      if(val == 11 || val == 12) {
+        this.text3 = "Sedikit Lebih Penting dari"
+        if(val == 11) {
+          this.kriteria[0].wt[4] = 3
+        }
+        if(val == 12) {
+          this.kriteria[0].wt[4] = 4
+        }
+      }
+      if(val == 13 || val == 14) {
+        this.text3 = "Lebih Penting dari"
+        if(val == 13) {
+          this.kriteria[0].wt[4] = 5
+        }
+        if(val == 14) {
+          this.kriteria[0].wt[4] = 6
+        }
+      }
+      if(val == 15 || val == 16) {
+        this.text3 = "Sangat Lebih Penting dari"
+        if(val == 15) {
+          this.kriteria[0].wt[4] = 7
+        }
+        if(val == 16) {
+          this.kriteria[0].wt[4] = 8
+        }
+      }
+      if(val == 17) {
+        this.text3 = "Mutlak Lebih Penting dari"
+        if(val == 17) {
+          this.kriteria[0].wt[4] = 9
+        }
+      } 
+    },
+      test4: function(val) {
+      if(val == 1) {
+        this.text4 = "Mutlak Tidak Lebih Penting dari"
+        this.kriteria[1].wt[2] = 1/9
+      }
+      if(val == 3 || val == 2) {
+        this.text4 = "Sangat Tidak Lebih Penting dari"
+        if(val == 2) {
+          this.kriteria[1].wt[2] = 1/8
+        }
+        if(val == 3) {
+          this.kriteria[1].wt[2] = 1/7
+        }
+      }
+      if(val == 5 || val == 4) {
+        this.text4 = "Tidak Lebih Penting dari"
+        if(val == 4) {
+          this.kriteria[1].wt[2] = 1/6
+        }
+        if(val == 5) {
+          this.kriteria[1].wt[2] = 1/5
+        }
+      }
+      if(val == 7 || val == 6) {
+        this.text4 = "Sedikit Tidak Lebih Penting dari"
+        if(val == 6) {
+          this.kriteria[1].wt[2] = 1/4
+        }
+        if(val == 7) {
+          this.kriteria[1].wt[2] = 1/3
+        }
+      }
+      if(val == 9 || val == 8 || val == 10) {
+        this.text4 = "Sama Pentingnya"
+        if(val == 8) {
+          this.kriteria[1].wt[2] = 1/2
+        }
+        if(val == 9) {
+          this.kriteria[1].wt[2] = 1
+        }
+        if(val == 10) {
+          this.kriteria[1].wt[2] = 2
+        }
+      }
+      if(val == 11 || val == 12) {
+        this.text4 = "Sedikit Lebih Penting dari"
+        if(val == 11) {
+          this.kriteria[1].wt[2] = 3
+        }
+        if(val == 12) {
+          this.kriteria[1].wt[2] = 4
+        }
+      }
+      if(val == 13 || val == 14) {
+        this.text4 = "Lebih Penting dari"
+        if(val == 13) {
+          this.kriteria[1].wt[2] = 5
+        }
+        if(val == 14) {
+          this.kriteria[1].wt[2] = 6
+        }
+      }
+      if(val == 15 || val == 16) {
+        this.text4 = "Sangat Lebih Penting dari"
+        if(val == 15) {
+          this.kriteria[1].wt[2] = 7
+        }
+        if(val == 16) {
+          this.kriteria[1].wt[2] = 8
+        }
+      }
+      if(val == 17) {
+        this.text4 = "Mutlak Lebih Penting dari"
+        if(val == 17) {
+          this.kriteria[1].wt[2] = 9
+        }
+      } 
+    },
+      test5: function(val) {
+      if(val == 1) {
+        this.text5 = "Mutlak Tidak Lebih Penting dari"
+        this.kriteria[1].wt[3] = 1/9
+      }
+      if(val == 3 || val == 2) {
+        this.text5 = "Sangat Tidak Lebih Penting dari"
+        if(val == 2) {
+          this.kriteria[1].wt[3] = 1/8
+        }
+        if(val == 3) {
+          this.kriteria[1].wt[3] = 1/7
+        }
+      }
+      if(val == 5 || val == 4) {
+        this.text5 = "Tidak Lebih Penting dari"
+        if(val == 4) {
+          this.kriteria[1].wt[3] = 1/6
+        }
+        if(val == 5) {
+          this.kriteria[1].wt[3] = 1/5
+        }
+      }
+      if(val == 7 || val == 6) {
+        this.text5 = "Sedikit Tidak Lebih Penting dari"
+        if(val == 6) {
+          this.kriteria[1].wt[3] = 1/4
+        }
+        if(val == 7) {
+          this.kriteria[1].wt[3] = 1/3
+        }
+      }
+      if(val == 9 || val == 8 || val == 10) {
+        this.text5 = "Sama Pentingnya"
+        if(val == 8) {
+          this.kriteria[1].wt[3] = 1/2
+        }
+        if(val == 9) {
+          this.kriteria[1].wt[3] = 1
+        }
+        if(val == 10) {
+          this.kriteria[1].wt[3] = 2
+        }
+      }
+      if(val == 11 || val == 12) {
+        this.text5 = "Sedikit Lebih Penting dari"
+        if(val == 11) {
+          this.kriteria[1].wt[3] = 3
+        }
+        if(val == 12) {
+          this.kriteria[1].wt[3] = 4
+        }
+      }
+      if(val == 13 || val == 14) {
+        this.text5 = "Lebih Penting dari"
+        if(val == 13) {
+          this.kriteria[1].wt[3] = 5
+        }
+        if(val == 14) {
+          this.kriteria[1].wt[3] = 6
+        }
+      }
+      if(val == 15 || val == 16) {
+        this.text5 = "Sangat Lebih Penting dari"
+        if(val == 15) {
+          this.kriteria[1].wt[3] = 7
+        }
+        if(val == 16) {
+          this.kriteria[1].wt[3] = 8
+        }
+      }
+      if(val == 17) {
+        this.text5 = "Mutlak Lebih Penting dari"
+        if(val == 17) {
+          this.kriteria[1].wt[3] = 9
+        }
+      } 
+    },
+      test6: function(val) {
+      if(val == 1) {
+        this.text6 = "Mutlak Tidak Lebih Penting dari"
+        this.kriteria[2].wt[3] = 1/9
+      }
+      if(val == 3 || val == 2) {
+        this.text6 = "Sangat Tidak Lebih Penting dari"
+        if(val == 2) {
+          this.kriteria[2].wt[3] = 1/8
+        }
+        if(val == 3) {
+          this.kriteria[2].wt[3] = 1/7
+        }
+      }
+      if(val == 5 || val == 4) {
+        this.text6 = "Tidak Lebih Penting dari"
+        if(val == 4) {
+          this.kriteria[2].wt[3] = 1/6
+        }
+        if(val == 5) {
+          this.kriteria[2].wt[3] = 1/5
+        }
+      }
+      if(val == 7 || val == 6) {
+        this.text6 = "Sedikit Tidak Lebih Penting dari"
+        if(val == 6) {
+          this.kriteria[2].wt[3] = 1/4
+        }
+        if(val == 7) {
+          this.kriteria[2].wt[3] = 1/3
+        }
+      }
+      if(val == 9 || val == 8 || val == 10) {
+        this.text6 = "Sama Pentingnya"
+        if(val == 8) {
+          this.kriteria[2].wt[3] = 1/2
+        }
+        if(val == 9) {
+          this.kriteria[2].wt[3] = 1
+        }
+        if(val == 10) {
+          this.kriteria[2].wt[3] = 2
+        }
+      }
+      if(val == 11 || val == 12) {
+        this.text6 = "Sedikit Lebih Penting dari"
+        if(val == 11) {
+          this.kriteria[2].wt[3] = 3
+        }
+        if(val == 12) {
+          this.kriteria[2].wt[3] = 4
+        }
+      }
+      if(val == 13 || val == 14) {
+        this.text6 = "Lebih Penting dari"
+        if(val == 13) {
+          this.kriteria[2].wt[3] = 5
+        }
+        if(val == 14) {
+          this.kriteria[2].wt[3] = 6
+        }
+      }
+      if(val == 15 || val == 16) {
+        this.text6 = "Sangat Lebih Penting dari"
+        if(val == 15) {
+          this.kriteria[2].wt[3] = 7
+        }
+        if(val == 16) {
+          this.kriteria[2].wt[3] = 8
+        }
+      }
+      if(val == 17) {
+        this.text6 = "Mutlak Lebih Penting dari"
+        if(val == 17) {
+          this.kriteria[2].wt[3] = 9
+        }
+      } 
+    },
+      test7: function(val) {
+      if(val == 1) {
+        this.text7 = "Mutlak Tidak Lebih Penting dari"
+        this.kriteria[1].wt[4] = 1/9
+      }
+      if(val == 3 || val == 2) {
+        this.text7 = "Sangat Tidak Lebih Penting dari"
+        if(val == 2) {
+          this.kriteria[1].wt[4] = 1/8
+        }
+        if(val == 3) {
+          this.kriteria[1].wt[4] = 1/7
+        }
+      }
+      if(val == 5 || val == 4) {
+        this.text7 = "Tidak Lebih Penting dari"
+        if(val == 4) {
+          this.kriteria[1].wt[4] = 1/6
+        }
+        if(val == 5) {
+          this.kriteria[1].wt[4] = 1/5
+        }
+      }
+      if(val == 7 || val == 6) {
+        this.text7 = "Sedikit Tidak Lebih Penting dari"
+        if(val == 6) {
+          this.kriteria[1].wt[4] = 1/4
+        }
+        if(val == 7) {
+          this.kriteria[1].wt[4] = 1/3
+        }
+      }
+      if(val == 9 || val == 8 || val == 10) {
+        this.text7 = "Sama Pentingnya"
+        if(val == 8) {
+          this.kriteria[1].wt[4] = 1/2
+        }
+        if(val == 9) {
+          this.kriteria[1].wt[4] = 1
+        }
+        if(val == 10) {
+          this.kriteria[1].wt[4] = 2
+        }
+      }
+      if(val == 11 || val == 12) {
+        this.text7 = "Sedikit Lebih Penting dari"
+        if(val == 11) {
+          this.kriteria[1].wt[4] = 3
+        }
+        if(val == 12) {
+          this.kriteria[1].wt[4] = 4
+        }
+      }
+      if(val == 13 || val == 14) {
+        this.text7 = "Lebih Penting dari"
+        if(val == 13) {
+          this.kriteria[1].wt[4] = 5
+        }
+        if(val == 14) {
+          this.kriteria[1].wt[4] = 6
+        }
+      }
+      if(val == 15 || val == 16) {
+        this.text7 = "Sangat Lebih Penting dari"
+        if(val == 15) {
+          this.kriteria[1].wt[4] = 7
+        }
+        if(val == 16) {
+          this.kriteria[1].wt[4] = 8
+        }
+      }
+      if(val == 17) {
+        this.text7 = "Mutlak Lebih Penting dari"
+        if(val == 17) {
+          this.kriteria[1].wt[4] = 9
+        }
+      } 
+    },
+      test8: function(val) {
+      if(val == 1) {
+        this.text8 = "Mutlak Tidak Lebih Penting dari"
+        this.kriteria[2].wt[4] = 1/9
+      }
+      if(val == 3 || val == 2) {
+        this.text8 = "Sangat Tidak Lebih Penting dari"
+        if(val == 2) {
+          this.kriteria[2].wt[4] = 1/8
+        }
+        if(val == 3) {
+          this.kriteria[2].wt[4] = 1/7
+        }
+      }
+      if(val == 5 || val == 4) {
+        this.text8 = "Tidak Lebih Penting dari"
+        if(val == 4) {
+          this.kriteria[2].wt[4] = 1/6
+        }
+        if(val == 5) {
+          this.kriteria[2].wt[4] = 1/5
+        }
+      }
+      if(val == 7 || val == 6) {
+        this.text8 = "Sedikit Tidak Lebih Penting dari"
+        if(val == 6) {
+          this.kriteria[2].wt[4] = 1/4
+        }
+        if(val == 7) {
+          this.kriteria[2].wt[4] = 1/3
+        }
+      }
+      if(val == 9 || val == 8 || val == 10) {
+        this.text8 = "Sama Pentingnya"
+        if(val == 8) {
+          this.kriteria[2].wt[4] = 1/2
+        }
+        if(val == 9) {
+          this.kriteria[2].wt[4] = 1
+        }
+        if(val == 10) {
+          this.kriteria[2].wt[4] = 2
+        }
+      }
+      if(val == 11 || val == 12) {
+        this.text8 = "Sedikit Lebih Penting dari"
+        if(val == 11) {
+          this.kriteria[2].wt[4] = 3
+        }
+        if(val == 12) {
+          this.kriteria[2].wt[4] = 4
+        }
+      }
+      if(val == 13 || val == 14) {
+        this.text8 = "Lebih Penting dari"
+        if(val == 13) {
+          this.kriteria[2].wt[4] = 5
+        }
+        if(val == 14) {
+          this.kriteria[2].wt[4] = 6
+        }
+      }
+      if(val == 15 || val == 16) {
+        this.text8 = "Sangat Lebih Penting dari"
+        if(val == 15) {
+          this.kriteria[2].wt[4] = 7
+        }
+        if(val == 16) {
+          this.kriteria[2].wt[4] = 8
+        }
+      }
+      if(val == 17) {
+        this.text8 = "Mutlak Lebih Penting dari"
+        if(val == 17) {
+          this.kriteria[2].wt[4] = 9
+        }
+      } 
+    },
+      test9: function(val) {
+      if(val == 1) {
+        this.text9 = "Mutlak Tidak Lebih Penting dari"
+        this.kriteria[3].wt[4] = 1/9
+      }
+      if(val == 3 || val == 2) {
+        this.text9 = "Sangat Tidak Lebih Penting dari"
+        if(val == 2) {
+          this.kriteria[3].wt[4] = 1/8
+        }
+        if(val == 3) {
+          this.kriteria[3].wt[4] = 1/7
+        }
+      }
+      if(val == 5 || val == 4) {
+        this.text9 = "Tidak Lebih Penting dari"
+        if(val == 4) {
+          this.kriteria[3].wt[4] = 1/6
+        }
+        if(val == 5) {
+          this.kriteria[3].wt[4] = 1/5
+        }
+      }
+      if(val == 7 || val == 6) {
+        this.text9 = "Sedikit Tidak Lebih Penting dari"
+        if(val == 6) {
+          this.kriteria[3].wt[4] = 1/4
+        }
+        if(val == 7) {
+          this.kriteria[3].wt[4] = 1/3
+        }
+      }
+      if(val == 9 || val == 8 || val == 10) {
+        this.text9 = "Sama Pentingnya"
+        if(val == 8) {
+          this.kriteria[3].wt[4] = 1/2
+        }
+        if(val == 9) {
+          this.kriteria[3].wt[4] = 1
+        }
+        if(val == 10) {
+          this.kriteria[3].wt[4] = 2
+        }
+      }
+      if(val == 11 || val == 12) {
+        this.text9 = "Sedikit Lebih Penting dari"
+        if(val == 11) {
+          this.kriteria[3].wt[4] = 3
+        }
+        if(val == 12) {
+          this.kriteria[3].wt[4] = 4
+        }
+      }
+      if(val == 13 || val == 14) {
+        this.text9 = "Lebih Penting dari"
+        if(val == 13) {
+          this.kriteria[3].wt[4] = 5
+        }
+        if(val == 14) {
+          this.kriteria[3].wt[4] = 6
+        }
+      }
+      if(val == 15 || val == 16) {
+        this.text9 = "Sangat Lebih Penting dari"
+        if(val == 15) {
+          this.kriteria[3].wt[4] = 7
+        }
+        if(val == 16) {
+          this.kriteria[3].wt[4] = 8
+        }
+      }
+      if(val == 17) {
+        this.text9 = "Mutlak Lebih Penting dari"
+        if(val == 17) {
+          this.kriteria[3].wt[4] = 9
+        }
+      } 
+    },
+        
+    },
     methods: {
         comparison: function() {
             for(let x=0; x<this.kriteria.length; x++) {
@@ -413,27 +1243,6 @@ export default {
         normalize: function() {
             this.comparison()
             const reducer = (pr, cr) => pr + cr;
-            
-            console.log(this.kriteria[0].wt)
-
-            // for(let x=0; x<this.kriteria.length;x++) {
-            //     let i = this.kriteria[x].prioritas
-            //     for(let y=0; y<this.kriteria.length;y++) {
-            //         this.kriteria[y].wt.push(i/this.kriteria[y].prioritas)
-            //     }
-            // }
-
-            // let wt = []
-            // for(let i=0; i<this.kriteria.length; i++) {
-            //     wt.push(this.kriteria[i].prioritas)
-            // }
-            // for(let j=0; j<this.kriteria.length; j++) {
-            //     for(let k=0; k<wt.length; k++) {
-            //         this.kriteria[j].wt2.push(this.kriteria[j].prioritas/wt[k])
-            //     }
-            //     console.log(this.kriteria[j].wt2)
-            // }
-            // console.log(wt)
 
             for(let i=0; i<this.kriteria.length; i++) {
                 for(let j=0; j<this.kriteria[i].wt.length; j++) {
@@ -494,9 +1303,5 @@ export default {
         border-radius:50px;
         text-align:center;
         box-shadow: 2px 2px 3px #999;
-    }
-    .input {
-        display: flex;
-        justify-content: space-between;
     }
 </style>
