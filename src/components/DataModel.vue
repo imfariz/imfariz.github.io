@@ -97,6 +97,34 @@
             <h2 class="align-self-center">(*) Menentukan Nilai Prioritas melalui Input Data dari User</h2>
         </div>
 
+        <!--Perhitungan SAW  -->
+        <h1 class="mt-5">METODE SAW</h1>
+        <section class="mx-5">
+          <h1 class="mt-5 text-start">Data Calon Mahasiswa</h1>
+          <table class="table table-stripped mt-5 table-bordered border-secondary">
+              <thead>
+                  <tr>
+                      <th>Alternatif</th>
+                      <th v-for="a in kriteria" :key="a">
+                          {{ a.nama }}
+                      </th>
+                      <th v-if="condition">Vektor</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr v-for="(x, index) in alt" :key="x">
+                      <td>A{{ index +1 }}</td>
+                      <td><input type="number" style="text-align: center" v-model="x.lm"></td>
+                      <td><input type="number" style="text-align: center" v-model="x.bi"></td>
+                      <td><input type="number" style="text-align: center" v-model="x.kp"></td>
+                      <td><input type="number" style="text-align: center" v-model="x.wc"></td>
+                      <td><input type="number" style="text-align: center" v-model="x.pu"></td>
+                      <td v-text="x.v" v-if="condition"></td>
+                  </tr>
+              </tbody>
+          </table>
+        </section>  
+
         <!-- Perhitungan AHP -->
         <div v-if="condition != false" class="mx-3">
           <div class="d-flex">
@@ -193,27 +221,30 @@
                     </tbody>
                 </table>
               </div>
-              <div>
-                <h1>Nilai Eigen Prioritas</h1>
-                <table class="table table-stripped table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Kriteria</th>
-                            <th>Jumlah</th>
-                            <th>Bobot</th>
-                            <th>&Lambda;</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="n in kriteria" :key="n">
-                            <td v-text="n.nama"></td>
-                            <td v-text="n.jumlah"></td>
-                            <td v-text="n.eigen"></td>
-                            <td v-text="n.lam"></td>
-                        </tr>
-                    </tbody>
-                </table>
-              </div>
+            </div>
+          </section>
+
+          <section class="d-flex mx-4">
+            <div>
+              <h1>Nilai Eigen Prioritas</h1>
+              <table class="table table-stripped table-bordered">
+                  <thead>
+                      <tr>
+                          <th>Kriteria</th>
+                          <th>Jumlah</th>
+                          <th>Bobot</th>
+                          <th>&Lambda;</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr v-for="n in kriteria" :key="n">
+                          <td v-text="n.nama"></td>
+                          <td v-text="n.jumlah"></td>
+                          <td v-text="n.eigen"></td>
+                          <td v-text="n.lam"></td>
+                      </tr>
+                  </tbody>
+              </table>
             </div>
             <div class="ms-3 align-self-center text-start">
               <p>Dengan menggunakan Metode AHP diperoleh : </p>
@@ -225,6 +256,7 @@
               <p v-else>Karena lebih dari 0.1, maka perhitungan data <strong>consistent</strong></p>
             </div>
           </section>
+
 
           <section class="d-flex my-5 mx-5">
             <div>
@@ -253,36 +285,10 @@
           </section>
         </div>
 
-        <!--Perhitungan SAW  -->
+              
 
-        <h1 class="mt-5">METODE SAW</h1>
 
-        <section class="mx-5">
-          <h1 class="mt-5 text-start">Data Calon Mahasiswa</h1>
-          <table class="table table-stripped mt-5 table-bordered border-secondary">
-              <thead>
-                  <tr>
-                      <th>Alternatif</th>
-                      <th v-for="a in kriteria" :key="a">
-                          {{ a.nama }}
-                      </th>
-                      <th>Vektor</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr v-for="(x, index) in alt" :key="x">
-                      <td>A{{ index +1 }}</td>
-                      <td><input type="number" style="text-align: center" v-model="x.lm"></td>
-                      <td><input type="number" style="text-align: center" v-model="x.bi"></td>
-                      <td><input type="number" style="text-align: center" v-model="x.kp"></td>
-                      <td><input type="number" style="text-align: center" v-model="x.wc"></td>
-                      <td><input type="number" style="text-align: center" v-model="x.pu"></td>
-                      <td v-text="x.v"></td>
-                  </tr>
-              </tbody>
-          </table>
-        </section>        
-
+        <!-- Floating Button -->
         <button class="btn btn-primary float" @click="normalize">
             N
         </button>
@@ -1440,7 +1446,12 @@ export default {
         },
         normalize: function() {
             this.add()
-            this.condition = true
+
+            if(this.condition == false) {
+              this.condition = true
+            } else {
+              this.condition = false
+            }
             const reducer = (pr, cr) => pr + cr;
 
             // Normalisasi dan pencarian nilai bobot
