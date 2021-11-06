@@ -1,96 +1,96 @@
 <template>
     <div>
         <h1>Metode AHP</h1>
-        <div class="d-flex">
+        <div class="d-flex mx-4">
             <!-- <h1>Input Perbandingan</h1> -->
             <table class="table mt-5 mb-5 mx-2 table-bordered border-secondary">
                 <thead>
                     <tr>
-                        <th>Kriteria</th>
-                        <th>Perbandingan</th>
-                        <th>Kriteria</th>
+                        <th style="width:25%">Kriteria</th>
+                        <th style="width:50%">Perbandingan</th>
+                        <th style="width:25%">Kriteria</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Logika</td>
+                        <td>Logika <br> {{ this.kriteria[0].wt[1] }}</td>
                         <td>
                             <p> {{ text }}</p>
                             <input type="range" min="1" max="17" step="1" v-model="test">
                         </td>
-                        <td>Bahasa Inggris</td>
+                        <td>Bahasa Inggris <br> {{ this.kriteria[1].wt[0] }} </td>
                     </tr>
                     <tr>
-                        <td>Logika</td>
+                        <td>Logika <br> {{ this.kriteria[0].wt[2] }} </td>
                         <td>
                             <p> {{ text1 }}</p>
                             <input type="range" min="1" max="17" step="1" v-model="test1">
                         </td>
-                        <td>Komputer</td>
+                        <td>Komputer <br> {{ this.kriteria[2].wt[0] }} </td>
                     </tr>
                     <tr>
-                        <td>Logika</td>
+                        <td>Logika <br> {{ this.kriteria[0].wt[3] }} </td>
                         <td>
                             <p> {{ text2 }}</p>
                             <input type="range" min="1" max="17" step="1" v-model="test2">
                         </td>
-                        <td>Wawancara</td>
+                        <td>Wawancara <br> {{ this.kriteria[3].wt[0] }}</td>
                     </tr>
                     <tr>
-                        <td>Logika</td>
+                        <td>Logika <br> {{ this.kriteria[0].wt[4] }} </td>
                         <td>
                             <p> {{ text3 }}</p>
                             <input type="range" min="1" max="17" step="1" v-model="test3">
                         </td>
-                        <td>Pengetahuan Umum</td>
+                        <td>Pengetahuan Umum <br> {{ this.kriteria[4].wt[0] }} </td>
                     </tr>
                     <tr>
-                        <td>Bahasa Inggris</td>
+                        <td>Bahasa Inggris <br> {{ this.kriteria[1].wt[2] }} </td>
                         <td>
                             <p> {{ text4 }}</p>
                             <input type="range" min="1" max="17" step="1" v-model="test4">
                         </td>
-                        <td>Komputer</td>
+                        <td>Komputer <br> {{ this.kriteria[2].wt[1] }} </td>
                     </tr>
                     <tr>
-                        <td>Bahasa Inggris</td>
+                        <td>Bahasa Inggris <br> {{ this.kriteria[1].wt[3] }} </td>
                         <td>
                             <p> {{ text5 }}</p>
                             <input type="range" min="1" max="17" step="1" v-model="test5">
                         </td>
-                        <td>Wawancara</td>
+                        <td>Wawancara <br> {{ this.kriteria[3].wt[1] }} </td>
                     </tr>
                     <tr>
-                        <td>Bahasa Inggris</td>
+                        <td>Bahasa Inggris <br> {{ this.kriteria[1].wt[4] }} </td>
                         <td>
                             <p> {{ text7 }}</p>
                             <input type="range" min="1" max="17" step="1" v-model="test7">
                         </td>
-                        <td>Pengetahuan Umum</td>
+                        <td>Pengetahuan Umum <br> {{ this.kriteria[4].wt[1] }} </td>
                     </tr>
                     <tr>
-                        <td>Komputer</td>
+                        <td>Komputer <br> {{ this.kriteria[2].wt[3] }} </td>
                         <td>
                             <p> {{ text6 }}</p>
                             <input type="range" min="1" max="17" step="1" v-model="test6">
                         </td>
-                        <td>Wawancara</td>
+                        <td>Wawancara <br> {{ this.kriteria[3].wt[2] }} </td>
                     </tr>
                     <tr>
-                        <td>Komputer</td>
+                        <td>Komputer <br> {{ this.kriteria[2].wt[4] }} </td>
                         <td>
                             <p> {{ text8 }}</p>
                             <input type="range" min="1" max="17" step="1" v-model="test8">
                         </td>
-                        <td>Pengetahuan Umum</td>
+                        <td>Pengetahuan Umum <br> {{ this.kriteria[4].wt[2] }} </td>
                     </tr>
                     <tr>
-                        <td>Wawancara</td>
+                        <td>Wawancara <br> {{ this.kriteria[3].wt[4] }} </td>
                         <td>
                             <p> {{ text9 }}</p>
                             <input type="range" min="1" max="17" step="1" v-model="test9">
                         </td>
-                        <td>Pengetahuan Umum</td>
+                        <td>Pengetahuan Umum <br> {{ this.kriteria[4].wt[3] }} </td>
                     </tr>
                 </tbody>
             </table>
@@ -98,7 +98,7 @@
         </div>
 
         <!-- Perhitungan AHP -->
-        <div v-if="condition != false">
+        <div v-if="condition != false" class="mx-3">
           <div class="d-flex">
             <div>
               <h1 class="mt-5">Matriks Perbandingan</h1>
@@ -147,7 +147,7 @@
                   </tbody>
               </table>
             </div>
-            <h3 class="align-self-center ms-4 text-start">
+            <h3 class="align-self-center ms-5 text-start">
               (*) Matriks Perbandingan diperoleh dari Nilai Prioritas yang diinputkan oleh user
               untuk kemudian diterjemahkan sesuai dengan tabel Saaty
             </h3>
@@ -233,14 +233,12 @@
                   <thead>
                       <tr>
                           <th>Alternatif</th>
-                          <th>Prioritas</th>
                           <th>Bobot</th>
                       </tr>
                   </thead>
                   <tbody>
-                      <tr v-for="(k, index) in kriteria" :key="k">
+                      <tr v-for="k in kriteria" :key="k">
                           <td v-text="k.nama"></td>
-                          <td><input type="text" style="border: none; text-align: center" v-model="kriteria[index].prioritas"></td>
                           <td v-text="k.eigen"></td>
                       </tr>
                   </tbody>
@@ -255,30 +253,35 @@
           </section>
         </div>
 
-        <!--Perhitungan SAW  -->        
-        <h1>Data Calon Mahasiswa</h1>
-        <table class="table table-stripped mt-5 table-bordered border-secondary">
-            <thead>
-                <tr>
-                    <th>Alternatif</th>
-                    <th v-for="a in kriteria" :key="a">
-                        {{ a.nama }}
-                    </th>
-                    <th>Vektor</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(x, index) in alt" :key="x">
-                    <td>A{{ index +1 }}</td>
-                    <td><input type="number" style="text-align: center" v-model="x.lm"></td>
-                    <td><input type="number" style="text-align: center" v-model="x.bi"></td>
-                    <td><input type="number" style="text-align: center" v-model="x.kp"></td>
-                    <td><input type="number" style="text-align: center" v-model="x.wc"></td>
-                    <td><input type="number" style="text-align: center" v-model="x.pu"></td>
-                    <td v-text="x.v"></td>
-                </tr>
-            </tbody>
-        </table>
+        <!--Perhitungan SAW  -->
+
+        <h1 class="mt-5">METODE SAW</h1>
+
+        <section class="mx-5">
+          <h1 class="mt-5 text-start">Data Calon Mahasiswa</h1>
+          <table class="table table-stripped mt-5 table-bordered border-secondary">
+              <thead>
+                  <tr>
+                      <th>Alternatif</th>
+                      <th v-for="a in kriteria" :key="a">
+                          {{ a.nama }}
+                      </th>
+                      <th>Vektor</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr v-for="(x, index) in alt" :key="x">
+                      <td>A{{ index +1 }}</td>
+                      <td><input type="number" style="text-align: center" v-model="x.lm"></td>
+                      <td><input type="number" style="text-align: center" v-model="x.bi"></td>
+                      <td><input type="number" style="text-align: center" v-model="x.kp"></td>
+                      <td><input type="number" style="text-align: center" v-model="x.wc"></td>
+                      <td><input type="number" style="text-align: center" v-model="x.pu"></td>
+                      <td v-text="x.v"></td>
+                  </tr>
+              </tbody>
+          </table>
+        </section>        
 
         <button class="btn btn-primary float" @click="normalize">
             N
@@ -1409,8 +1412,7 @@ export default {
                         }
                         let y = k.reduce(reducer)
                         this.total.push(y)
-                    }
-                console.log(this.total)    
+                    }  
             }
         },
         comparison: function() {
