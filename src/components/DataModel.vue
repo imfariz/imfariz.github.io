@@ -94,7 +94,10 @@
                     </tr>
                 </tbody>
             </table>
-            <h2 class="align-self-center">(*) Menentukan Nilai Prioritas melalui Input Data dari User</h2>
+            <div class="align-self-center">
+              <h2>(*) Menentukan Nilai Prioritas melalui Input Data dari User</h2>
+              <button class="btn btn-primary mt-4 w-50" @click="normalize">Hitung</button>
+            </div>
         </div>
 
         <!--Perhitungan SAW  -->
@@ -257,7 +260,6 @@
             </div>
           </section>
 
-
           <section class="d-flex my-5 mx-5">
             <div>
               <h1>Kriteria Potensial</h1>
@@ -284,12 +286,9 @@
             </div>
           </section>
         </div>
-
-              
-
-
+        
         <!-- Floating Button -->
-        <button class="btn btn-primary float" @click="normalize">
+        <button class="btn btn-primary float" @click="show">
             N
         </button>
     </div>
@@ -321,7 +320,7 @@ export default {
             text8: "Prioritas",
             test9: 9,
             text9: "Prioritas",
-            total: [],
+            total: [1,1,1,1,1],
             data: [
                 {
                     nama: 'Somber',
@@ -393,7 +392,7 @@ export default {
                     nama: 'Logika',
                     prioritas: 1,
                     wt: [1, 1, 1, 1, 1],
-                    nm: [],
+                    nm: [1, 1, 1, 1, 1],
                     eigen: 0,
                     nEigen: [],
                     jumlah: 0,
@@ -403,7 +402,7 @@ export default {
                     nama: 'Bahasa Inggris',
                     prioritas: 3,
                     wt: [1, 1, 1, 1, 1],
-                    nm: [],
+                    nm: [1, 1, 1, 1, 1],
                     eigen: 0,
                     nEigen: [],
                     jumlah: 0,
@@ -413,7 +412,7 @@ export default {
                     nama: 'Komputer',
                     prioritas: 2,
                     wt: [1, 1, 1, 1, 1],
-                    nm: [],
+                    nm: [1, 1, 1, 1, 1],
                     eigen: 0,
                     nEigen: [],
                     jumlah: 0,
@@ -423,7 +422,7 @@ export default {
                     nama: 'Wawancara',
                     prioritas: 3,
                     wt: [1, 1, 1, 1, 1],
-                    nm: [],
+                    nm: [1, 1, 1, 1, 1],
                     eigen: 0,
                     nEigen: [],
                     jumlah: 0,
@@ -433,7 +432,7 @@ export default {
                     nama: 'Pengetahuan Umum',
                     prioritas: 3,
                     wt: [1, 1, 1, 1, 1],
-                    nm: [],
+                    nm: [1, 1, 1, 1, 1],
                     eigen: 0,
                     nEigen: [],
                     jumlah: 0,
@@ -442,8 +441,7 @@ export default {
             ]
         }
     },
-    computed: {
-        
+    computed: {  
         eigenMax: function() {
             let em = []
             const reducer = (pr, cr) => pr + cr;
@@ -1417,48 +1415,27 @@ export default {
                             k.push(y)
                         }
                         let y = k.reduce(reducer)
-                        this.total.push(y)
+                        this.total[i] = y
                     }  
             }
         },
-        comparison: function() {
-            for(let x=0; x<this.kriteria.length; x++) {
-                for(let y=0; y<this.kriteria[x].wt.length; y++) {
-                    if(x == y) {
-                        this.kriteria[x].wt[y] = 1
-                    }
-                }
-            }
-
-            this.kriteria[1].wt[0] = 1/this.kriteria[0].wt[1]
-            this.kriteria[2].wt[0] = 1/this.kriteria[0].wt[2]
-            this.kriteria[3].wt[0] = 1/this.kriteria[0].wt[3]
-            this.kriteria[4].wt[0] = 1/this.kriteria[0].wt[4]
-
-            this.kriteria[2].wt[1] = 1/this.kriteria[1].wt[2]
-
-            this.kriteria[3].wt[1] = 1/this.kriteria[1].wt[3]
-            this.kriteria[3].wt[2] = 1/this.kriteria[2].wt[3]
-
-            this.kriteria[4].wt[1] = 1/this.kriteria[1].wt[4]
-            this.kriteria[4].wt[2] = 1/this.kriteria[2].wt[4]
-            this.kriteria[4].wt[3] = 1/this.kriteria[3].wt[4]
-        },
-        normalize: function() {
-            this.add()
-
-            if(this.condition == false) {
+        show: function() {
+            if(!this.condition) {
               this.condition = true
             } else {
               this.condition = false
-            }
+            }          
+        },
+        normalize: function() {
+            this.add()
+            // this.show()
             const reducer = (pr, cr) => pr + cr;
 
             // Normalisasi dan pencarian nilai bobot
             for(let i=0; i<this.kriteria.length; i++) {
                 for(let j=0; j<this.kriteria[i].wt.length; j++) {
                     let y = this.kriteria[i].wt[j]/this.total[j]
-                    this.kriteria[i].nm.push(y)
+                    this.kriteria[i].nm[j] = y
                 }
                 this.kriteria[i].eigen = (this.kriteria[i].nm.reduce(reducer))/this.kriteria.length
             }
@@ -1467,7 +1444,7 @@ export default {
             for(let x=0; x<this.kriteria.length;x++) {
                 for(let z=0; z<this.kriteria[x].wt.length;z++) {
                     let o = this.kriteria[x].wt[z]*this.kriteria[z].eigen
-                    this.kriteria[x].nEigen.push(o)
+                    this.kriteria[x].nEigen[z] = o
                 }
                 this.kriteria[x].jumlah = this.kriteria[x].nEigen.reduce(reducer)
                 this.kriteria[x].lam = this.kriteria[x].jumlah/this.kriteria[x].eigen
