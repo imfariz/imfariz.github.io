@@ -15,7 +15,7 @@
                     <tr>
                         <td>Logika <br> {{ this.kriteria[0].wt[1] }}</td>
                         <td>
-                            <p> {{ text }}</p>
+                            <p> <strong> {{ text }} </strong> </p>
                             <input type="range" min="1" max="17" step="1" v-model="test">
                         </td>
                         <td>Bahasa Inggris <br> {{ this.kriteria[1].wt[0] }} </td>
@@ -23,7 +23,7 @@
                     <tr>
                         <td>Logika <br> {{ this.kriteria[0].wt[2] }} </td>
                         <td>
-                            <p> {{ text1 }}</p>
+                            <p><strong> {{ text1 }} </strong></p>
                             <input type="range" min="1" max="17" step="1" v-model="test1">
                         </td>
                         <td>Komputer <br> {{ this.kriteria[2].wt[0] }} </td>
@@ -31,7 +31,7 @@
                     <tr>
                         <td>Logika <br> {{ this.kriteria[0].wt[3] }} </td>
                         <td>
-                            <p> {{ text2 }}</p>
+                            <p><strong> {{ text2 }} </strong></p>
                             <input type="range" min="1" max="17" step="1" v-model="test2">
                         </td>
                         <td>Wawancara <br> {{ this.kriteria[3].wt[0] }}</td>
@@ -39,7 +39,7 @@
                     <tr>
                         <td>Logika <br> {{ this.kriteria[0].wt[4] }} </td>
                         <td>
-                            <p> {{ text3 }}</p>
+                            <p><strong> {{ text3 }} </strong></p>
                             <input type="range" min="1" max="17" step="1" v-model="test3">
                         </td>
                         <td>Pengetahuan Umum <br> {{ this.kriteria[4].wt[0] }} </td>
@@ -47,7 +47,7 @@
                     <tr>
                         <td>Bahasa Inggris <br> {{ this.kriteria[1].wt[2] }} </td>
                         <td>
-                            <p> {{ text4 }}</p>
+                            <p><strong> {{ text4 }} </strong></p>
                             <input type="range" min="1" max="17" step="1" v-model="test4">
                         </td>
                         <td>Komputer <br> {{ this.kriteria[2].wt[1] }} </td>
@@ -55,7 +55,7 @@
                     <tr>
                         <td>Bahasa Inggris <br> {{ this.kriteria[1].wt[3] }} </td>
                         <td>
-                            <p> {{ text5 }}</p>
+                            <p><strong> {{ text5 }} </strong></p>
                             <input type="range" min="1" max="17" step="1" v-model="test5">
                         </td>
                         <td>Wawancara <br> {{ this.kriteria[3].wt[1] }} </td>
@@ -63,7 +63,7 @@
                     <tr>
                         <td>Bahasa Inggris <br> {{ this.kriteria[1].wt[4] }} </td>
                         <td>
-                            <p> {{ text7 }}</p>
+                            <p><strong> {{ text7 }} </strong></p>
                             <input type="range" min="1" max="17" step="1" v-model="test7">
                         </td>
                         <td>Pengetahuan Umum <br> {{ this.kriteria[4].wt[1] }} </td>
@@ -71,7 +71,7 @@
                     <tr>
                         <td>Komputer <br> {{ this.kriteria[2].wt[3] }} </td>
                         <td>
-                            <p> {{ text6 }}</p>
+                            <p><strong> {{ text6 }} </strong></p>
                             <input type="range" min="1" max="17" step="1" v-model="test6">
                         </td>
                         <td>Wawancara <br> {{ this.kriteria[3].wt[2] }} </td>
@@ -79,7 +79,7 @@
                     <tr>
                         <td>Komputer <br> {{ this.kriteria[2].wt[4] }} </td>
                         <td>
-                            <p> {{ text8 }}</p>
+                            <p><strong> {{ text8 }} </strong></p>
                             <input type="range" min="1" max="17" step="1" v-model="test8">
                         </td>
                         <td>Pengetahuan Umum <br> {{ this.kriteria[4].wt[2] }} </td>
@@ -87,7 +87,7 @@
                     <tr>
                         <td>Wawancara <br> {{ this.kriteria[3].wt[4] }} </td>
                         <td>
-                            <p> {{ text9 }}</p>
+                            <p><strong> {{ text9 }} </strong></p>
                             <input type="range" min="1" max="17" step="1" v-model="test9">
                         </td>
                         <td>Pengetahuan Umum <br> {{ this.kriteria[4].wt[3] }} </td>
@@ -115,8 +115,8 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr v-for="(x, index) in alt" :key="x">
-                      <td>A{{ index +1 }}</td>
+                  <tr v-for="x in alt" :key="x">
+                      <td>{{ x.name }}</td>
                       <td><input type="number" style="text-align: center" v-model="x.lm"></td>
                       <td><input type="number" style="text-align: center" v-model="x.bi"></td>
                       <td><input type="number" style="text-align: center" v-model="x.kp"></td>
@@ -324,8 +324,8 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr v-for="(x, index) in alt" :key="x">
-                      <td>A{{ index +1 }}</td>
+                  <tr v-for="x in alt" :key="x">
+                      <td>{{ x.name }}</td>
                       <td v-text="x.v" v-if="condition"></td>
                   </tr>
               </tbody>
@@ -407,6 +407,7 @@ export default {
             ],
             alt: [
                 {
+                    name: "A1",
                     lm: 32.5,
                     bi: 35,
                     kp: 50,
@@ -415,6 +416,7 @@ export default {
                     v: 0
                 },
                 {
+                    name: "A2",
                     lm: 42.5,
                     bi: 30,
                     kp: 55,
@@ -423,6 +425,7 @@ export default {
                     v: 0
                 },
                 {
+                    name: "A3",
                     lm: 42.5,
                     bi: 35,
                     kp: 60,
@@ -431,6 +434,7 @@ export default {
                     v: 0
                 },
                 {
+                    name: "A4",
                     lm: 30,
                     bi: 15,
                     kp: 50,
@@ -1496,6 +1500,7 @@ export default {
                 this.kriteria[x].jumlah = this.kriteria[x].nEigen.reduce(reducer)
                 this.kriteria[x].lam = this.kriteria[x].jumlah/this.kriteria[x].eigen
             }
+            this.kriteria.sort((a,b) => parseFloat(b.eigen) - parseFloat(a.eigen))
         },
         saw: function() {
             //Normalisasi Nilai Umum pada Metode SAW
@@ -1507,8 +1512,6 @@ export default {
                 this.c5[h] = (this.alt[h].pu>50)?0.75:0.5
             }
 
-            console.log(this.c1)
-
             for(let h=0; h<this.alt.length;h++) {
                 this.alt[h].v = (this.c1[h]*this.kriteria[0].eigen) +
                             (this.c2[h]*this.kriteria[1].eigen) +
@@ -1516,7 +1519,7 @@ export default {
                             (this.c4[h]*this.kriteria[3].eigen) +
                             (this.c5[h]*this.kriteria[4].eigen)
             }
-
+            this.alt.sort((a,b) => parseFloat(b.v) - parseFloat(a.v))
         },
         normalize: function() {
           this.ahp()
