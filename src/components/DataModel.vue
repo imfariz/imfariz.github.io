@@ -285,11 +285,58 @@
               </h2>
             </div>
           </section>
+
+          <h1 class="mt-5">METODE SAW</h1>
+          <section class="d-flex my-4">
+            <section class="mx-5">
+              <h1 class="mt-5 text-start">Data Calon Mahasiswa</h1>
+              <table class="table table-stripped mt-5 table-bordered border-secondary">
+                  <thead>
+                      <tr>
+                          <th>Alternatif</th>
+                          <th v-for="a in kriteria" :key="a">
+                              {{ a.nama }}
+                          </th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr v-for="(x, index) in c1" :key="x">
+                          <td>A{{ index +1 }}</td>
+                          <td>{{ c1[index] }}</td>
+                          <td>{{ c2[index] }}</td>
+                          <td>{{ c3[index] }}</td>
+                          <td>{{ c4[index] }}</td>
+                          <td>{{ c5[index] }}</td>
+                      </tr>
+                  </tbody>
+              </table>
+            </section>
+            <h1 class="align-self-center ms-5 text-start">(*) Data Nilai Mahasiswa Yang Diinputkan Kemudian di Normalisasi sesuai dengan ketentuan</h1> 
+          </section>
+
+          <h1 class="mt-5 mx-5 text-start">Perhitungan SAW</h1>
+          <div class="d-flex">
+            <table class="table table-stripped mt-5 table-bordered border-secondary w-25 mx-5">
+              <thead>
+                  <tr>
+                      <th>Alternatif</th>
+                      <th v-if="condition">Vektor</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr v-for="(x, index) in alt" :key="x">
+                      <td>A{{ index +1 }}</td>
+                      <td v-text="x.v" v-if="condition"></td>
+                  </tr>
+              </tbody>
+            </table>
+            <h1 class="align-self-center ms-5 text-start">(*) Data yang dinormalisasi, kemudian dikalikan dengan nilai bobot sesuai dengan masing-masing kriteria</h1> 
+          </div>
         </div>
         
         <!-- Floating Button -->
         <button class="btn btn-primary float" @click="show">
-            N
+            S
         </button>
     </div>
 </template>
@@ -300,27 +347,32 @@ export default {
     data() {
         return {
             condition: false,
-            test: 9,
-            text: "Prioritas",
-            test1: 9,
-            text1: "Prioritas",
-            test2: 9,
-            text2: "Prioritas",
-            test3: 9,
-            text3: "Prioritas",
-            test4: 9,
-            text4: "Prioritas",
-            test5: 9,
-            text5: "Prioritas",
-            test6: 9,
-            text6: "Prioritas",
-            test7: 9,
-            text7: "Prioritas",
-            test8: 9,
-            text8: "Prioritas",
-            test9: 9,
-            text9: "Prioritas",
+            test: 11,
+            text: "Sedikit Lebih Penting",
+            test1: 10,
+            text1: "Sama Pentingnya",
+            test2: 11,
+            text2: "Sedikit Lebih Penting",
+            test3: 11,
+            text3: "Sedikit Lebih Penting",
+            test4: 11,
+            text4: "Sedikit Lebih Penting",
+            test5: 10,
+            text5: "Sama Pentingnya",
+            test6: 10,
+            text6: "Sama Pentingnya",
+            test7: 11,
+            text7: "Sedikit Lebih Penting",
+            test8: 11,
+            text8: "Sedikit Lebih Penting",
+            test9: 10,
+            text9: "Sama Pentingnya",
             total: [1,1,1,1,1],
+            c1: [1,1,1,1],
+            c2: [1,1,1,1],
+            c3: [1,1,1,1],
+            c4: [1,1,1,1],
+            c5: [1,1,1,1],
             data: [
                 {
                     nama: 'Somber',
@@ -390,8 +442,7 @@ export default {
             kriteria: [
                 {
                     nama: 'Logika',
-                    prioritas: 1,
-                    wt: [1, 1, 1, 1, 1],
+                    wt: [1, 3, 2, 3, 3],
                     nm: [1, 1, 1, 1, 1],
                     eigen: 0,
                     nEigen: [],
@@ -400,8 +451,7 @@ export default {
                 },
                 {
                     nama: 'Bahasa Inggris',
-                    prioritas: 3,
-                    wt: [1, 1, 1, 1, 1],
+                    wt: [0.333, 1, 3, 2, 3],
                     nm: [1, 1, 1, 1, 1],
                     eigen: 0,
                     nEigen: [],
@@ -410,8 +460,7 @@ export default {
                 },
                 {
                     nama: 'Komputer',
-                    prioritas: 2,
-                    wt: [1, 1, 1, 1, 1],
+                    wt: [0.5, 0.333, 1, 2, 3],
                     nm: [1, 1, 1, 1, 1],
                     eigen: 0,
                     nEigen: [],
@@ -420,8 +469,7 @@ export default {
                 },
                 {
                     nama: 'Wawancara',
-                    prioritas: 3,
-                    wt: [1, 1, 1, 1, 1],
+                    wt: [0.333, 0.5, 0.5, 1, 2],
                     nm: [1, 1, 1, 1, 1],
                     eigen: 0,
                     nEigen: [],
@@ -430,8 +478,7 @@ export default {
                 },
                 {
                     nama: 'Pengetahuan Umum',
-                    prioritas: 3,
-                    wt: [1, 1, 1, 1, 1],
+                    wt: [0.333, 0.333, 0.333, 0.5, 1],
                     nm: [1, 1, 1, 1, 1],
                     eigen: 0,
                     nEigen: [],
@@ -1426,7 +1473,7 @@ export default {
               this.condition = false
             }          
         },
-        normalize: function() {
+        ahp: function() {
             this.add()
             // this.show()
             const reducer = (pr, cr) => pr + cr;
@@ -1449,35 +1496,31 @@ export default {
                 this.kriteria[x].jumlah = this.kriteria[x].nEigen.reduce(reducer)
                 this.kriteria[x].lam = this.kriteria[x].jumlah/this.kriteria[x].eigen
             }
-
-
+        },
+        saw: function() {
             //Normalisasi Nilai Umum pada Metode SAW
-            let c1 = []
-            let c2 = []
-            let c3 = []
-            let c4 = []
-            let c5 = []
             for(let h=0; h<this.alt.length;h++) {
-                this.alt[h].lm = (this.alt[h].lm>29)?0.5:this[h].lm
-                this.alt[h].bi = (this.alt[h].bi<30)?0.25:0.5
-                this.alt[h].kp = (this.alt[h].kp>50)?0.75:0.5
-                this.alt[h].wc = (this.alt[h].wc>80)?1.0:0.75
-                this.alt[h].pu = (this.alt[h].pu>50)?0.75:0.5
-                
-                c1.push(this.alt[h].lm)
-                c2.push(this.alt[h].bi)
-                c3.push(this.alt[h].kp)
-                c4.push(this.alt[h].wc)
-                c5.push(this.alt[h].pu)
+                this.c1[h] = (this.alt[h].lm>29)?0.5:this.alt[h].lm
+                this.c2[h] = (this.alt[h].bi<30)?0.25:0.5
+                this.c3[h] = (this.alt[h].kp>50)?0.75:0.5
+                this.c4[h] = (this.alt[h].wc>80)?1.0:0.75
+                this.c5[h] = (this.alt[h].pu>50)?0.75:0.5
             }
 
+            console.log(this.c1)
+
             for(let h=0; h<this.alt.length;h++) {
-                this.alt[h].v = (this.alt[h].lm*this.kriteria[0].eigen) +
-                            (this.alt[h].bi*this.kriteria[1].eigen) +
-                            (this.alt[h].kp*this.kriteria[2].eigen) +
-                            (this.alt[h].wc*this.kriteria[3].eigen) +
-                            (this.alt[h].pu*this.kriteria[4].eigen)
+                this.alt[h].v = (this.c1[h]*this.kriteria[0].eigen) +
+                            (this.c2[h]*this.kriteria[1].eigen) +
+                            (this.c3[h]*this.kriteria[2].eigen) +
+                            (this.c4[h]*this.kriteria[3].eigen) +
+                            (this.c5[h]*this.kriteria[4].eigen)
             }
+
+        },
+        normalize: function() {
+          this.ahp()
+          this.saw()
         }
     }
 }
