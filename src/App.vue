@@ -12,38 +12,16 @@
                         <button class="cta cta-secondary" @click="showingCr">
                             CRITERIAS
                         </button>
-                        <!-- <Icon icon="fluent:table-cell-edit-24-regular" @click="showingCdt" class="alt me-5" />    
-                        <Icon icon="fluent:table-cell-edit-24-regular" @click="showingCr" class="alt me-5" /> -->
                     </div>
                 </div>
                 <h2>Candidates has been ranked by their subject score. <br>The scores that accumulated with AHP method then being ranked with SAW method. </h2>
             </div>
             <div class="lists d-flex flex-column justify-content-around mt-4">
-            <div class="list d-flex align-items-end">
-                <p class="rank ms-2">1</p>
-                <p class="name ms-2">Fariz Ramadhan</p>
-                <p class="score me-2">5.1</p>
-            </div>
-            <div class="list d-flex align-items-end">
-                <p class="rank ms-2">1</p>
-                <p class="name ms-2">Fariz Ramadhan</p>
-                <p class="score me-2">5.1</p>
-            </div>
-            <div class="list d-flex align-items-end">
-                <p class="rank ms-2">1</p>
-                <p class="name ms-2">Fariz Ramadhan</p>
-                <p class="score me-2">5.1</p>
-            </div>
-            <div class="list d-flex align-items-end">
-                <p class="rank ms-2">1</p>
-                <p class="name ms-2">Fariz Ramadhan</p>
-                <p class="score me-2">5.1</p>
-            </div>
-            <div class="list d-flex align-items-end">
-                <p class="rank ms-2">1</p>
-                <p class="name ms-2">Fariz Ramadhan</p>
-                <p class="score me-2">5.1</p>
-            </div>
+                <div class="list d-flex align-items-end" v-for="(alt,index) in alternative" :key="alt">
+                    <p class="rank ms-2" v-text="index +1"></p>
+                    <p class="name ms-2" v-text="alt.nama"></p>
+                    <p class="score me-2" v-text="alt.value"></p>
+                </div>
             </div>
             </div>
             <div class="p-4 criteria d-flex flex-column justify-content-center">
@@ -55,41 +33,19 @@
                 <h2>Criteria that given by user will be accumulating with <br> AHP method to find the most potential criteria </h2>
             </div>
             <div class="lists d-flex flex-column justify-content-around mt-4">
-            <div class="list d-flex align-items-end">
-                <p class="rank ms-2">1</p>
-                <p class="name ms-2">Fariz Ramadhan</p>
-                <p class="score me-2">5.1</p>
-            </div>
-            <div class="list d-flex align-items-end">
-                <p class="rank ms-2">1</p>
-                <p class="name ms-2">Fariz Ramadhan</p>
-                <p class="score me-2">5.1</p>
-            </div>
-            <div class="list d-flex align-items-end">
-                <p class="rank ms-2">1</p>
-                <p class="name ms-2">Fariz Ramadhan</p>
-                <p class="score me-2">5.1</p>
-            </div>
-            <div class="list d-flex align-items-end">
-                <p class="rank ms-2">1</p>
-                <p class="name ms-2">Fariz Ramadhan</p>
-                <p class="score me-2">5.1</p>
-            </div>
-            <div class="list d-flex align-items-end">
-                <p class="rank ms-2">1</p>
-                <p class="name ms-2">Fariz Ramadhan</p>
-                <p class="score me-2">5.1</p>
-            </div>
+                <div class="list d-flex align-items-end" v-for="(crt, index) in kriteria" :key="crt">
+                    <p class="rank ms-2" v-text="index+1"></p>
+                    <p class="name ms-2" v-text="crt.nama"></p>
+                    <p class="score me-2" v-text="crt.eigen"></p>
+                </div>
             </div>
             </div>
         </div>
 
-        <modal-candidate @checked="showingCrt" v-if="closed==true"/>
+        <!-- Modal -->
+        <modal-candidate @switch="fillCriteria($event)" @checked="showingCrt" :crt="kriteria" v-if="closed==true"/>
         <modal-criteria @checked="showingCr" v-if="closeCrt==true" />
         <modal-alternative @checked="showingCdt" v-if="closeCdt==true" />
-        
-
-        
     </div>
 </template>
 
@@ -108,11 +64,112 @@ export default {
     ModalCriteria,
     ModalAlternative
   },
+  created() {
+    this.ahp()
+    // Ranking
+    this.kriteria.sort((a,b) => parseFloat(b.eigen) - parseFloat(a.eigen))
+  },
   data() {
       return {
+        //   Modal Variables
           closed: false,
           closeCdt: false,
-          closeCrt: false
+          closeCrt: false,
+
+        // Data Variables
+        alternative: [
+            {
+                nama: "Fariz Ramadhan",
+                logma: 70,
+                english: 85,
+                computer: 80,
+                interview: 70,
+                general: 87,
+                value: 1
+            },
+            {
+                nama: "Nabila Fitriana",
+                logma: 70,
+                english: 85,
+                computer: 80,
+                interview: 70,
+                general: 87,
+                value: 1
+            },
+            {
+                nama: "Yessica Tamara",
+                logma: 70,
+                english: 85,
+                computer: 80,
+                interview: 70,
+                general: 87,
+                value: 1
+            },
+            {
+                nama: "Azizi Shafa Asadel",
+                logma: 70,
+                english: 85,
+                computer: 80,
+                interview: 70,
+                general: 87,
+                value: 1
+            },
+        ],
+        kriteria: [
+            {
+                nama: "Logika Matematika",
+                bobot: [1,1,1,1,1],
+                normal: [1,1,1,1,1],
+                bobotPrioritas: 0,
+                normalEigen: [],
+                jumlah: 0,
+                eigen: 0
+            },
+            {
+                nama: "Bahasa Inggris",
+                bobot: [1,1,1,1,1],
+                normal: [1,1,1,1,1],
+                bobotPrioritas: 0,
+                normalEigen: [],
+                jumlah: 0,
+                eigen: 0
+            },
+            {
+                nama: "Komputer",
+                bobot: [1,1,1,1,1],
+                normal: [1,1,1,1,1],
+                bobotPrioritas: 0,
+                normalEigen: [],
+                jumlah: 0,
+                eigen: 0
+            },
+            {
+                nama: "Wawancara",
+                bobot: [1,1,1,1,1],
+                normal: [1,1,1,1,1],
+                bobotPrioritas: 0,
+                normalEigen: [],
+                jumlah: 0,
+                eigen: 0
+            },
+            {
+                nama: "Pengetahuan Umum",
+                bobot: [1,1,1,1,1],
+                normal: [1,1,1,1,1],
+                bobotPrioritas: 0,
+                normalEigen: [],
+                jumlah: 0,
+                eigen: 0
+            }
+        ],
+        totalKriteria: [1,1,1,1,1]
+      }
+  },
+  watch: {
+      closed: function(val) {
+          if(val == false) {
+              this.ahp()
+          }
       }
   },
   methods: {
@@ -137,7 +194,54 @@ export default {
              this.closeCrt = true
          }
      },
-  }
+     fillCriteria: function(value) {
+         this.kriteria = value
+         console.log(this.kriteria)
+     },
+
+    //  Algoritma
+    totalizing: function() {
+        let k = []
+            if(this.kriteria[0].bobot != []) {
+                const reducer = (pr, cr) => pr + cr;
+                    for(let i=0; i<this.kriteria.length; i++) {
+                        k = []
+                        for(let j=0; j<this.kriteria[i].bobot.length; j++) {
+                            let y = this.kriteria[j].bobot[i]
+                            k.push(y)
+                        }
+                        let y = k.reduce(reducer)
+                        this.totalKriteria[i] = y
+                    }  
+            }
+    },
+    ahp: function() {
+    this.totalizing()
+    const reducer = (previous, current) => previous + current;
+
+    // Normalisasi dan pencarian nilai bobot
+    for(let i=0; i<this.kriteria.length; i++) {
+        for(let j=0; j<this.kriteria[i].bobot.length; j++) {
+            let y = this.kriteria[i].bobot[j]/this.totalKriteria[j]
+            this.kriteria[i].normal[j] = y
+        }
+        this.kriteria[i].bobotPrioritas = (this.kriteria[i].normal.reduce(reducer))/this.kriteria.length
+    }
+
+    //Meghitung Eigen Maksimum
+    for(let x=0; x<this.kriteria.length;x++) {
+        for(let z=0; z<this.kriteria[x].bobot.length;z++) {
+            let o = this.kriteria[x].bobot[z]*this.kriteria[z].bobotPrioritas
+            this.kriteria[x].normalEigen[z] = o
+        }
+        this.kriteria[x].jumlah = this.kriteria[x].normalEigen.reduce(reducer)
+        this.kriteria[x].eigen = this.kriteria[x].jumlah/this.kriteria[x].bobotPrioritas
+    }
+
+    // Ranking
+    this.kriteria.sort((a,b) => parseFloat(b.eigen) - parseFloat(a.eigen))
+    },
+}
 }
 </script>
 
@@ -455,6 +559,7 @@ button.cta-secondary:hover {
 .input-list .input-slide {
     font-size: 12px;
     color: #9f9f9f;
+    width: 30%;
 }
 
 .nput-list .input-slide input {
