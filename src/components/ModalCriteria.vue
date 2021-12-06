@@ -9,52 +9,12 @@
                 <table class="text-center">
                     <thead>
                         <th class="text-start">Criteria</th>
-                        <th>Logika Matematika</th>
-                        <th>Bahasa Inggris</th>
-                        <th>Komputer</th>
-                        <th>Wawancara</th>
-                        <th>Pengetahuan Umum</th>
+                        <th v-for="x in bobot" :key="x" v-text="x.nama"></th>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="text-start">Logika Matematika</td>
-                            <td><input type="number" style="text-align: center" value="2"></td>
-                            <td><input type="number" style="text-align: center" value="2"></td>
-                            <td><input type="number" style="text-align: center" value="2"></td>
-                            <td><input type="number" style="text-align: center" value="2"></td>
-                            <td><input type="number" style="text-align: center" value="2"></td>
-                        </tr>
-                        <tr>
-                            <td class="text-start">Bahasa Inggris</td>
-                            <td><input type="number" style="text-align: center" value="2"></td>
-                            <td><input type="number" style="text-align: center" value="2"></td>
-                            <td><input type="number" style="text-align: center" value="2"></td>
-                            <td><input type="number" style="text-align: center" value="2"></td>
-                            <td><input type="number" style="text-align: center" value="2"></td>
-                        </tr>
-                        <tr>
-                            <td class="text-start">Komputer</td>
-                            <td><input type="number" style="text-align: center" value="2"></td>
-                            <td><input type="number" style="text-align: center" value="2"></td>
-                            <td><input type="number" style="text-align: center" value="2"></td>
-                            <td><input type="number" style="text-align: center" value="2"></td>
-                            <td><input type="number" style="text-align: center" value="2"></td>
-                        </tr>
-                        <tr>
-                            <td class="text-start">Wawancara</td>
-                            <td><input type="number" style="text-align: center" value="2"></td>
-                            <td><input type="number" style="text-align: center" value="2"></td>
-                            <td><input type="number" style="text-align: center" value="2"></td>
-                            <td><input type="number" style="text-align: center" value="2"></td>
-                            <td><input type="number" style="text-align: center" value="2"></td>
-                        </tr>
-                        <tr>
-                            <td class="text-start">Pengetahuan Umum</td>
-                            <td><input type="number" style="text-align: center" value="2"></td>
-                            <td><input type="number" style="text-align: center" value="2"></td>
-                            <td><input type="number" style="text-align: center" value="2"></td>
-                            <td><input type="number" style="text-align: center" value="2"></td>
-                            <td><input type="number" style="text-align: center" value="2"></td>
+                        <tr v-for="x in bobot" :key="x">
+                            <td class="text-start" v-text="x.nama"></td>
+                            <td v-for="(y, index) in x.bobot" :key="y"><input type="number" style="text-align: center" v-model="x.bobot[index]"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -77,6 +37,7 @@ export default {
     components: {
         Icon
     },
+    props: ['bobot']
 }
 </script>
 

@@ -16,43 +16,19 @@
                             <th>Pengetahuan Umum</th>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="text-start">Fariz Ramadhan</td>
-                                <td><input type="number" style="text-align: center" value="2"></td>
-                                <td><input type="number" style="text-align: center" value="2"></td>
-                                <td><input type="number" style="text-align: center" value="2"></td>
-                                <td><input type="number" style="text-align: center" value="2"></td>
-                                <td><input type="number" style="text-align: center" value="2"></td>
-                            </tr>
-                            <tr>
-                                <td class="text-start">Fariz Ramadhan</td>
-                                <td><input type="number" style="text-align: center" value="2"></td>
-                                <td><input type="number" style="text-align: center" value="2"></td>
-                                <td><input type="number" style="text-align: center" value="2"></td>
-                                <td><input type="number" style="text-align: center" value="2"></td>
-                                <td><input type="number" style="text-align: center" value="2"></td>
-                            </tr>
-                            <tr>
-                                <td class="text-start">Fariz Ramadhan</td>
-                                <td><input type="number" style="text-align: center" value="2"></td>
-                                <td><input type="number" style="text-align: center" value="2"></td>
-                                <td><input type="number" style="text-align: center" value="2"></td>
-                                <td><input type="number" style="text-align: center" value="2"></td>
-                                <td><input type="number" style="text-align: center" value="2"></td>
-                            </tr>
-                            <tr>
-                                <td class="text-start">Fariz Ramadhan</td>
-                                <td><input type="number" style="text-align: center" value="2"></td>
-                                <td><input type="number" style="text-align: center" value="2"></td>
-                                <td><input type="number" style="text-align: center" value="2"></td>
-                                <td><input type="number" style="text-align: center" value="2"></td>
-                                <td><input type="number" style="text-align: center" value="2"></td>
+                            <tr v-for="alt in alternatives" :key="alt">
+                                <td class="text-start" v-text="alt.nama"></td>
+                                <td><input type="number" style="text-align: center" v-model="alt.logma"></td>
+                                <td><input type="number" style="text-align: center" v-model="alt.english"></td>
+                                <td><input type="number" style="text-align: center" v-model="alt.computer"></td>
+                                <td><input type="number" style="text-align: center" v-model="alt.interview"></td>
+                                <td><input type="number" style="text-align: center" v-model="alt.general"></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="model-cdt-cta mt-5 align-self-end me-5">
-                    <button class="cta cta-primary">SAVE</button>
+                    <button class="cta cta-primary" @click="save">SAVE</button>
                 </div>
             </div>
             <button class="close" @click="$emit('checked')">
@@ -69,6 +45,23 @@ export default {
     components: {
         Icon
     },
+    props: {
+        alt: Array
+    },
+    created() {
+        this.alternatives = this.alt
+    },
+    data() {
+        return {
+            alternatives: []
+        }
+    },
+    methods: {
+        save: function() {
+            this.$emit('switch', this.alternatives)
+            this.$emit('checked')
+        }
+    }
 }
 </script>
 

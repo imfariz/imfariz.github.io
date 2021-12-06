@@ -17,10 +17,10 @@
                 <h2>Candidates has been ranked by their subject score. <br>The scores that accumulated with AHP method then being ranked with SAW method. </h2>
             </div>
             <div class="lists d-flex flex-column justify-content-around mt-4">
-                <div class="list d-flex align-items-end" v-for="(alt,index) in alternative" :key="alt">
+                <div class="list d-flex align-items-end" v-for="(alt,index) in result.alt" :key="alt">
                     <p class="rank ms-2" v-text="index +1"></p>
                     <p class="name ms-2" v-text="alt.nama"></p>
-                    <p class="score me-2" v-text="alt.value"></p>
+                    <p class="score me-2" v-text="Number((alt.value).toFixed(3))"></p>
                 </div>
             </div>
             </div>
@@ -33,19 +33,25 @@
                 <h2>Criteria that given by user will be accumulating with <br> AHP method to find the most potential criteria </h2>
             </div>
             <div class="lists d-flex flex-column justify-content-around mt-4">
-                <div class="list d-flex align-items-end" v-for="(crt, index) in kriteria" :key="crt">
+                <div class="list d-flex align-items-end" v-for="(crt, index) in result.crt" :key="crt">
                     <p class="rank ms-2" v-text="index+1"></p>
                     <p class="name ms-2" v-text="crt.nama"></p>
-                    <p class="score me-2" v-text="crt.eigen"></p>
+                    <p class="score me-2" v-text="Number((crt.bobotPrioritas).toFixed(3))"></p>
                 </div>
             </div>
             </div>
         </div>
 
         <!-- Modal -->
-        <modal-candidate @switch="fillCriteria($event)" @checked="showingCrt" :crt="kriteria" v-if="closed==true"/>
-        <modal-criteria @checked="showingCr" v-if="closeCrt==true" />
-        <modal-alternative @checked="showingCdt" v-if="closeCdt==true" />
+        <modal-candidate @switch="fillCriteria($event)" @checked="showingCrt" :crt="kriteria" v-if="closed==true" :prioValue="priorityValue" />
+
+        <transition name="MC">
+            <modal-criteria name="fade" @checked="showingCr" :bobot="kriteria" v-if="closeCrt==true" />
+        </transition>
+
+        <transition name="MA">
+            <modal-alternative @switch="fillAlternative($event)" @checked="showingCdt" :alt="alternative" v-if="closeCdt==true" />
+        </transition>
     </div>
 </template>
 
@@ -64,61 +70,62 @@ export default {
     ModalCriteria,
     ModalAlternative
   },
-  created() {
-    this.ahp()
-    // Ranking
-    this.kriteria.sort((a,b) => parseFloat(b.eigen) - parseFloat(a.eigen))
+  mounted() {
+    this.finishing()
   },
   data() {
       return {
+        //Watch Properties
+        priorityValue: [11,10,11,11,11,10,11,10,11,10],
+
         //   Modal Variables
-          closed: false,
-          closeCdt: false,
-          closeCrt: false,
+        closed: false,
+        closeCdt: false,
+        closeCrt: false,
 
         // Data Variables
         alternative: [
             {
                 nama: "Fariz Ramadhan",
-                logma: 70,
-                english: 85,
-                computer: 80,
-                interview: 70,
-                general: 87,
+                logma: 32.5,
+                english: 35,
+                computer: 50,
+                interview: 75,
+                general: 35,
                 value: 1
             },
             {
                 nama: "Nabila Fitriana",
-                logma: 70,
-                english: 85,
-                computer: 80,
-                interview: 70,
-                general: 87,
+                logma: 42.5,
+                english: 30,
+                computer: 55,
+                interview: 72.9,
+                general: 60,
                 value: 1
             },
             {
                 nama: "Yessica Tamara",
-                logma: 70,
-                english: 85,
-                computer: 80,
-                interview: 70,
-                general: 87,
+                logma: 42.5,
+                english: 35,
+                computer: 60,
+                interview: 83.6,
+                general: 40,
                 value: 1
             },
             {
                 nama: "Azizi Shafa Asadel",
-                logma: 70,
-                english: 85,
-                computer: 80,
-                interview: 70,
-                general: 87,
+                logma: 30,
+                english: 15,
+                computer: 50,
+                interview: 81.4,
+                general: 45,
                 value: 1
             },
         ],
         kriteria: [
             {
                 nama: "Logika Matematika",
-                bobot: [1,1,1,1,1],
+                bobot: [1, 3, 2, 3, 3],
                 normal: [1,1,1,1,1],
                 bobotPrioritas: 0,
                 normalEigen: [],
@@ -127,7 +134,7 @@ export default {
             },
             {
                 nama: "Bahasa Inggris",
-                bobot: [1,1,1,1,1],
+                bobot: [0.333, 1, 3, 2, 3],
                 normal: [1,1,1,1,1],
                 bobotPrioritas: 0,
                 normalEigen: [],
@@ -136,7 +143,7 @@ export default {
             },
             {
                 nama: "Komputer",
-                bobot: [1,1,1,1,1],
+                bobot: [0.5, 0.333, 1, 2, 3],
                 normal: [1,1,1,1,1],
                 bobotPrioritas: 0,
                 normalEigen: [],
@@ -145,7 +152,7 @@ export default {
             },
             {
                 nama: "Wawancara",
-                bobot: [1,1,1,1,1],
+                bobot: [0.333, 0.5, 0.5, 1, 2],
                 normal: [1,1,1,1,1],
                 bobotPrioritas: 0,
                 normalEigen: [],
@@ -154,7 +161,7 @@ export default {
             },
             {
                 nama: "Pengetahuan Umum",
-                bobot: [1,1,1,1,1],
+                bobot: [0.333, 0.333, 0.333, 0.5, 1],
                 normal: [1,1,1,1,1],
                 bobotPrioritas: 0,
                 normalEigen: [],
@@ -162,42 +169,63 @@ export default {
                 eigen: 0
             }
         ],
-        totalKriteria: [1,1,1,1,1]
-      }
-  },
-  watch: {
-      closed: function(val) {
-          if(val == false) {
-              this.ahp()
-          }
-      }
-  },
-  methods: {
-     showingCrt : function() {
-         if(this.closed == true){
-             this.closed = false
-         } else {
-             this.closed = true
-         }
-     },
-     showingCdt: function() {
-        if(this.closeCdt == true){
-             this.closeCdt = false
-         } else {
-             this.closeCdt = true
-         }
-     },
-     showingCr: function() {
-        if(this.closeCrt == true){
-             this.closeCrt = false
-         } else {
-             this.closeCrt = true
-         }
-     },
-     fillCriteria: function(value) {
-         this.kriteria = value
-         console.log(this.kriteria)
-     },
+
+        // Utility
+        totalKriteria: [1,1,1,1,1],
+        criteria1: [1,1,1,1],
+        criteria2: [1,1,1,1],
+        criteria3: [1,1,1,1],
+        criteria4: [1,1,1,1],
+        criteria5: [1,1,1,1],
+
+        //Ranked
+        result: {
+            alt: [],
+            crt: []
+        }
+    }
+},
+watch: {
+    closed: function(val) {
+        if(val == false) {
+            this.finishing()
+        }
+    },
+    closeCdt: function(val) {
+        if(val == false) {
+            this.finishing()
+        }
+    }
+},
+methods: {
+    showingCrt : function() {
+        if(this.closed == true){
+            this.closed = false
+        } else {
+            this.closed = true
+        }
+    },
+    showingCdt: function() {
+    if(this.closeCdt == true){
+            this.closeCdt = false
+        } else {
+            this.closeCdt = true
+        }
+    },
+    showingCr: function() {
+    if(this.closeCrt == true){
+            this.closeCrt = false
+        } else {
+            this.closeCrt = true
+        }
+    },
+    fillCriteria: function(value) {
+        this.kriteria = value.kriteria
+        this.priorityValue = value.priority
+    },
+    fillAlternative: function(value) {
+        this.alternative = value
+    },
 
     //  Algoritma
     totalizing: function() {
@@ -239,8 +267,37 @@ export default {
     }
 
     // Ranking
-    this.kriteria.sort((a,b) => parseFloat(b.eigen) - parseFloat(a.eigen))
+    // this.kriteria.sort((a,b) => parseFloat(b.eigen) - parseFloat(a.eigen))
     },
+    saw: function() {
+        //Normalisasi Nilai Umum pada Metode SAW
+        for(let h=0; h<this.alternative.length;h++) {
+            this.criteria1[h] = (this.alternative[h].logma>29)?0.5:this.alternative[h].logma
+            this.criteria2[h] = (this.alternative[h].english<30)?0.25:0.5
+            this.criteria3[h] = (this.alternative[h].computer>50)?0.75:0.5
+            this.criteria4[h] = (this.alternative[h].interview>80)?1.0:0.75
+            this.criteria5[h] = (this.alternative[h].general>50)?0.75:0.5
+        }
+
+        for(let h=0; h<this.alternative.length;h++) {
+            this.alternative[h].value = (this.criteria1[h]*this.kriteria[0].bobotPrioritas) +
+                (this.criteria2[h]*this.kriteria[1].bobotPrioritas) +
+                (this.criteria3[h]*this.kriteria[2].bobotPrioritas) +
+                (this.criteria4[h]*this.kriteria[3].bobotPrioritas) +
+                (this.criteria5[h]*this.kriteria[4].bobotPrioritas)
+        }
+
+        //Ranking
+        // this.alternative.sort((a,b) => parseFloat(b.value) - parseFloat(a.value))
+    },
+    finishing: function() {
+        this.ahp()
+        this.saw()
+
+        //Ranking
+        this.result.crt = this.kriteria.sort((a,b) => parseFloat(b.bobotPrioritas) - parseFloat(a.bobotPrioritas))
+        this.result.alt = this.alternative.sort((a,b) => parseFloat(b.value) - parseFloat(a.value))
+    }
 }
 }
 </script>
@@ -293,7 +350,7 @@ button.cta-secondary:hover {
     top: 0;
     width: 100%; 
     height: 100%;
-    overflow: auto;
+    overflow: hidden;
     background-color: rgba(0,0,0,0.7); 
 }
 
@@ -304,7 +361,7 @@ button.cta-secondary:hover {
     top: 0;
     width: 100%; 
     height: 100%;
-    overflow: auto;
+    overflow: hidden;
     background-color: rgba(255, 255, 255, 0.7); 
 }
 
@@ -590,6 +647,35 @@ button.cta-secondary:hover {
 }
 
 /* Animation */
+
+/* Entering Page */
+.MC-enter-active {
+    animation: fadedMC 500ms ease;
+}
+
+.MA-enter-active {
+    animation: fadedMA 500ms ease;
+}
+
+/* Leaving Page */
+.MC-leave-active {
+    animation: fadedMC 500ms ease reverse;
+}
+
+.MA-leave-active {
+    animation: fadedMA 500ms ease reverse;
+}
+
+@keyframes fadedMC {
+    from {transform: translateX(100%);}
+    to {transform: translateX(0);}
+}
+
+@keyframes fadedMA {
+    from {transform: translateX(-100%);}
+    to {transform: translateX(0);}
+}
+
 @keyframes spin {
     from {
         transform: rotate(0deg);

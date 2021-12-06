@@ -147,10 +147,21 @@ export default {
         Icon
     },
     props: {
-      crt: Array
+      crt: Array,
+      prioValue: Array
     },
     created() {
       this.kriteria = this.crt
+      this.test0 = this.prioValue[0]
+      this.test1 = this.prioValue[1]
+      this.test2 = this.prioValue[2]
+      this.test3 = this.prioValue[3]
+      this.test4 = this.prioValue[4]
+      this.test5 = this.prioValue[5]
+      this.test6 = this.prioValue[6]
+      this.test7 = this.prioValue[7]
+      this.test8 = this.prioValue[8]
+      this.test9 = this.prioValue[9]
     },
     data() {
         return {
@@ -180,10 +191,11 @@ export default {
 
             // Data Priority
             kriteria: [],
+            priority: []
         }
     },
     watch: {
-        test0: function(val) {
+      test0: function(val) {
         if(val == 1) {
             this.text0 = "Mutlak Tidak Lebih Penting dari"
             this.kriteria[0].bobot[1] = 1/9
@@ -277,7 +289,7 @@ export default {
             }
         } 
     },
-        test1: function(val) {
+      test1: function(val) {
         if(val == 1) {
             this.text1 = "Mutlak Tidak Lebih Penting dari"
             this.kriteria[0].bobot[2] = 1/9
@@ -371,7 +383,7 @@ export default {
             }
         } 
     },
-        test2: function(val) {
+      test2: function(val) {
       if(val == 1) {
         this.text2 = "Mutlak Tidak Lebih Penting dari"
         this.kriteria[0].bobot[3] = 1/9
@@ -1145,7 +1157,13 @@ export default {
     },
     methods: {
       test: function() {
-        this.$emit('switch', this.kriteria)
+        let data = {
+          kriteria: this.kriteria,
+          priority: [this.test0, this.test1, this.test2, this.test3, this.test4,
+            this.test5, this.test6, this.test7, this.test8, this.test9]
+        }
+        this.$emit('switch', data)
+        this.$emit('checked')
       }
     }
 }
